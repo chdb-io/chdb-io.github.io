@@ -29,7 +29,7 @@ You can use any [format](https://clickhouse.com/docs/en/interfaces/formats) supp
 ```python
 chdb.query('select * from file("data.parquet", Parquet)', 'Dataframe')
 ```
-Queries can return data using any [supported format](#/formats) as well as `Dataframe` format
+Queries can return data using any [supported format](https://clickhouse.com/docs/en/interfaces/formats as well as `Dataframe` and `Debug`
 
 
 ##### Data Input
@@ -37,7 +37,7 @@ The following methods are available to access on-disk and in-memory data formats
 
 ##### 🗂️ Query on Files _(Parquet, CSV, JSON, Arrow, ORC and 60+)_
 
-You can execute SQL against any supported type and return desired [format](#/formats).
+You can execute SQL against any supported type and return desired [format](https://clickhouse.com/docs/en/interfaces/formats.
 
 ```python
 import chdb
@@ -145,7 +145,9 @@ npm install node-chdb
 
 #### Usage
 
-##### 🗂️ Query Constructor
+<!-- tabs:start -->
+
+##### **🗂️ Query Constructor**
 ```javascript
 const chdb = require("chdb-node");
 
@@ -161,14 +163,14 @@ var result = dbdisk.session("SELECT hello()", "TabSeparated"); // optional forma
 console.log(result) // chDB
 ```
 
-##### 🗂️ Query _(query, format)_
+##### 🗂️ **Query _(query, format)_**
 ```javascript
 const chdb = require("chdb-node").chdb;
 var result = chdb.Execute("SELECT version()", "CSV");
 console.log(result) // 23.6.1.1
 ```
 
-##### 🗂️ Session _(query, *format, *path)_
+##### 🗂️ **Session _(query, *format, *path)_**
 ```javascript
 const chdb = require("chdb-node").chdb;
 chdb.Session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'")
@@ -185,6 +187,7 @@ var result =  = chdb.Session("SELECT hello();")
 console.log(result) // chDB
 tmp.cleanup.sync();
 ```
+<!-- tabs:end -->
 
 ### **Go**
 
