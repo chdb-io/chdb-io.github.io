@@ -1,6 +1,12 @@
 
+## Data Formats
 
-The formats supported by `chdb` queries match ClickHouse for both `input` and `output`:
+Just like ClickHouse, chdb can accept and return data in various formats. 
+
+- A format supported for input can be used to parse the data provided to `INSERT`s, to perform `SELECT`s from a file-backed table such as File, URL or HDFS, or to read a dictionary. 
+- A format supported for output can be used to arrange the results of a `SELECT`, and to perform `INSERT`s into a file-backed table.
+
+The supported data formats are:
 
 | Format                                                                                    | Input | Output |
 |-------------------------------------------------------------------------------------------|------|-------|
