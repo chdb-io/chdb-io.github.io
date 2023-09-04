@@ -15,17 +15,22 @@ pip install chdb
 
 ##### Run in command line
 
-| `python3 -m chdb SQL [OutputFormat]`
+| `python3 -m chdb [SQL] [OutputFormat]` 
 
 ```bash
 python3 -m chdb "SELECT 1,'abc'" Pretty
 ```
 
-You can return data using any [clickhouse format](https://clickhouse.com/docs/en/interfaces/formats) as well as the `Dataframe`
+You can use any [format](https://clickhouse.com/docs/en/interfaces/formats) supported by ClickHouse
+
+
+##### Run in Python
 
 ```python
 chdb.query('select * from file("data.parquet", Parquet)', 'Dataframe')
 ```
+Queries can return data using any supported [clickhouse format](https://clickhouse.com/docs/en/interfaces/formats) as well as `Dataframe` format
+
 
 ##### Data Input
 The following methods are available to access on-disk and in-memory data formats:
