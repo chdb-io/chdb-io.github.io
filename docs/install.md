@@ -1,5 +1,27 @@
-<img src="http://de4.sipcapture.io:3333/logo.png" width=100>
+<img src="logo.png" width=100>
 
 # Installation
 
-WIP
+<!-- tabs:start -->
+
+#### **Python**
+
+Python
+
+#### **NodeJS**
+
+NodeJS
+
+#### **Go**
+
+Golang
+
+#### **Rust**
+
+Rust
+
+#### **Bun**
+
+Bun.sh
+
+<!-- tabs:end -->
