@@ -14,9 +14,17 @@ pip install chdb
 #### Usage
 
 ##### Run in command line
-> `python3 -m chdb SQL [OutputFormat]`
+
+| `python3 -m chdb SQL [OutputFormat]`
+
 ```bash
 python3 -m chdb "SELECT 1,'abc'" Pretty
+```
+
+You can return data using any [clickhouse format](https://clickhouse.com/docs/en/interfaces/formats) as well as the `Dataframe`
+
+```python
+chdb.query('select * from file("data.parquet", Parquet)', 'Dataframe')
 ```
 
 ##### Data Input
@@ -31,18 +39,12 @@ import chdb
 res = chdb.query('select version()', 'Pretty'); print(res)
 ```
 
-###### Work with Parquet or CSV
+###### 🗂️ Work with Parquet or CSV
 ```python
 # See more data type format in tests/format_output.py
 res = chdb.query('select * from file("data.parquet", Parquet)', 'JSON'); print(res)
 res = chdb.query('select * from file("data.csv", CSV)', 'CSV');  print(res)
 print(f"SQL read {res.rows_read()} rows, {res.bytes_read()} bytes, elapsed {res.elapsed()} seconds")
-```
-
-###### Pandas dataframe output
-```python
-# See more in https://clickhouse.com/docs/en/interfaces/formats
-chdb.query('select * from file("data.parquet", Parquet)', 'Dataframe')
 ```
 
 ##### 🗂️ Query On Pandas DataFrame
@@ -114,13 +116,13 @@ For more examples, see [examples](examples) and [tests](tests).
 #### Requuirements
 
 <!-- tabs:start -->
-Install [libchdb](https://github.com/metrico/libchdb) on your x86/arm64 system before proceeding
-#### **DEB**
+Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
+##### 📦 **DEB**
 ```bash
 sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
 sudo apt install libchdb
 ```
-##### **RPM**
+##### 📦 **RPM**
 ```bash
 sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
 sudo yum install -y libchdb
@@ -178,7 +180,41 @@ tmp.cleanup.sync();
 
 ### **Go**
 
-Coming soon
+#### Requuirements
+
+<!-- tabs:start -->
+Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
+##### 📦 **DEB**
+```bash
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
+sudo apt install libchdb
+```
+##### 📦 **RPM**
+```bash
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
+sudo yum install -y libchdb
+```
+<!-- tabs:end -->
+
+#### Installation
+```bash
+go get github.com/chdb-io/chdb-go/chdb
+```
+
+#### Usage
+```go
+package main
+
+import (
+    "fmt"
+    "github.com/chdb-io/chdb-go/chdb"
+)
+
+func main() {
+    result := chdb.Query("SELECT version()", "CSV")
+    fmt.Println(result)
+}
+```
 
 ### **Rust**
 
