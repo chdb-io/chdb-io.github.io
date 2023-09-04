@@ -7,7 +7,7 @@
 ### **Python**
 
 #### Installation
-```
+```bash
 pip install chdb
 ```
 
@@ -24,14 +24,14 @@ print(res)
 #### Requuirements
 
 <!-- tabs:start -->
-Install `libchdb` on your x86/arm64 system before proceeding
+Install [libchdb](https://github.com/metrico/libchdb) on your x86/arm64 system before proceeding
 #### **DEB**
-```
+```bash
 sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
 sudo apt install libchdb
 ```
 ##### **RPM**
-```
+```bash
 sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
 sudo yum install -y libchdb
 ```
@@ -39,12 +39,12 @@ sudo yum install -y libchdb
 
 
 #### Installation
-```
+```bash
 npm install node-chdb
 ```
 
 #### Usage
-```
+```javascript
 const chdb = require("chdb-node");
 
 // Query (ephemeral)
