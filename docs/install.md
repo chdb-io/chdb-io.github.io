@@ -4,23 +4,39 @@
 
 <!-- tabs:start -->
 
-#### **Python**
+### **Python**
 
-Python
+#### Installation
+```
+pip install chdb
+```
 
-#### **NodeJS**
+#### Usage
+```python
+import chdb
 
-NodeJS
+res = chdb.query('select * from file("data.parquet", Parquet)', 'JSON');
+print(res)
+```
 
-#### **Go**
+### **NodeJS**
+
+#### Requuirements
+
+#### Installation
+```
+npm install node-chdb
+```
+
+### **Go**
 
 Golang
 
-#### **Rust**
+### **Rust**
 
 Rust
 
-#### **Bun**
+### **Bun**
 
 Bun.sh
 
