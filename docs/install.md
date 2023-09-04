@@ -122,12 +122,12 @@ For more examples, see [examples](examples) and [tests](tests).
 
 <!-- tabs:start -->
 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
-##### 📦 **DEB**
+##### **📦 DEB**
 ```bash
 sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
 sudo apt install libchdb
 ```
-##### 📦 **RPM**
+##### **📦 RPM**
 ```bash
 sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
 sudo yum install -y libchdb
@@ -189,12 +189,12 @@ tmp.cleanup.sync();
 
 <!-- tabs:start -->
 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
-##### 📦 **DEB**
+##### **📦 DEB**
 ```bash
 sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
 sudo apt install libchdb
 ```
-##### 📦 **RPM**
+##### **📦 RPM**
 ```bash
 sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
 sudo yum install -y libchdb
