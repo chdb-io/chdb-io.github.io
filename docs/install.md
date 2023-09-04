@@ -19,22 +19,19 @@ pip install chdb
 python3 -m chdb "SELECT 1,'abc'" Pretty
 ```
 
-<br>
-
 ##### Data Input
 The following methods are available to access on-disk and in-memory data formats:
 
-<details>
-    <summary><h4>🗂️ Query On File</h4> (Parquet, CSV, JSON, Arrow, ORC and 60+)</summary>
+##### 🗂️ Query on Files_(Parquet, CSV, JSON, Arrow, ORC and 60+)_
 
-You can execute SQL and return desired format data.
+You can execute SQL against any supported type and return desired format.
 
 ```python
 import chdb
 res = chdb.query('select version()', 'Pretty'); print(res)
 ```
 
-##### Work with Parquet or CSV
+###### Work with Parquet or CSV
 ```python
 # See more data type format in tests/format_output.py
 res = chdb.query('select * from file("data.parquet", Parquet)', 'JSON'); print(res)
@@ -42,17 +39,13 @@ res = chdb.query('select * from file("data.csv", CSV)', 'CSV');  print(res)
 print(f"SQL read {res.rows_read()} rows, {res.bytes_read()} bytes, elapsed {res.elapsed()} seconds")
 ```
 
-##### Pandas dataframe output
+###### Pandas dataframe output
 ```python
 # See more in https://clickhouse.com/docs/en/interfaces/formats
 chdb.query('select * from file("data.parquet", Parquet)', 'Dataframe')
 ```
-</details>
 
-<details>
-    <summary><h4>🗂️ Query On Table</h4> (Pandas DataFrame, Parquet file/bytes, Arrow bytes) </summary>
-
-##### Query On Pandas DataFrame
+##### 🗂️ Query On Pandas DataFrame
 ```python
 import chdb.dataframe as cdf
 import pandas as pd
@@ -65,12 +58,8 @@ print(ret_tbl)
 # Query on the DataFrame Table
 print(ret_tbl.query('select b, sum(a) from __table__ group by b'))
 ```
-</details>
 
-<details>
-  <summary><h4>🗂️ Query with Stateful Session</h4></summary>
-
-##### Query Session
+##### 🗂️ Query with Stateful Session<
 ```python
 from chdb import session as chs
 
@@ -87,10 +76,8 @@ print(sess.query("SELECT * FROM db_xxx.view_xxx", "Pretty"))
 ```
 
 see also: [test_stateful.py](tests/test_stateful.py).
-</details>
 
-<details>
-    <summary><h4>🗂️ Query with Python DB-API 2.0</h4></summary>
+#####🗂️ Query with Python DB-API 2.0
 
 ```python
 import chdb.dbapi as dbapi
@@ -104,11 +91,8 @@ print("data: ", cur1.fetchone())
 cur1.close()
 conn1.close()
 ```
-</details>
 
-
-<details>
-    <summary><h4>🗂️ Query with UDF (User Defined Functions)</h4></summary>
+##### 🗂️ Query with UDF (User Defined Functions)
 
 ```python
 from chdb.udf import chdb_udf
@@ -120,9 +104,6 @@ def sum_udf(lhs, rhs):
 
 print(query("select sum_udf(12,22)"))
 ```
-
-see also: [test_udf.py](tests/test_udf.py).
-</details>
 
 For more examples, see [examples](examples) and [tests](tests).
 
