@@ -24,17 +24,17 @@ print(res)
 #### Requuirements
 
 <!-- tabs:start -->
-#### Libchdb DEB
+Install `libchdb` on your x86/arm64 system before proceeding
+##### DEB
 ```
 sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
 sudo apt install libchdb
 ```
-#### Libchdb RPM
+##### RPM
 ```
 sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
 sudo yum install -y libchdb
 ```
-
 <!-- tabs:end -->
 
 
