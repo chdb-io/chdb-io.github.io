@@ -13,7 +13,11 @@
     .sidebar-nav img:first-of-type {
       max-width: 130px;
     }
+    .app {
+      margin-top: 50px;
+    }
     .sidebar {
+      margin-top: 50px;
       max-width: 15rem;
     }
     .content {
@@ -26,17 +30,31 @@
     :root {
       --sidebar-width : 15rem;
     }
+    .headercontent {
+      color: #FFF;
+      font-size: large;
+    }
+    .headercontent a {
+      color: #FFF;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
-  <div id="app"></div>
+  <div class="headercontent" style="position:fixed; top:0; height:50px; width: 100%; background: #000; color: #FFF; ">
+      <img src="chdb-snake-white.png" style="height: 50px;">
+      <div style="float:right; height: 30px; vertical-aligh: middle; padding: 1%; ">
+        <a href="https://chdb.io" target="_blank">Github 🔗</a>
+      </div>
+  </div>
+  <div id="app" style="margin-top:30px;"></div>
   <script>
     window.$docsify = {
-      name: 'chdb',
-      repo: 'https://chdb.io',
+      // name: 'chdb',
+      // repo: 'https://chdb.io',
       themeColor: '#000000',
       mergeNavbar: true,
-      logo: 'logo.png height=100px',
+      // logo: 'logo.png height=100px',
       loadSidebar: true,
       search: {
         maxAge: 86400000, // Expiration time, the default one day
