@@ -29,22 +29,23 @@ You can use any [format](https://clickhouse.com/docs/en/interfaces/formats) supp
 ```python
 chdb.query('select * from file("data.parquet", Parquet)', 'Dataframe')
 ```
-Queries can return data using any supported [clickhouse format](https://clickhouse.com/docs/en/interfaces/formats) as well as `Dataframe` format
+Queries can return data using any [supported format](#/formats) as well as `Dataframe` format
 
 
 ##### Data Input
-The following methods are available to access on-disk and in-memory data formats:
+The following methods are available to access on-disk and in-memory data formats
 
 ##### 🗂️ Query on Files _(Parquet, CSV, JSON, Arrow, ORC and 60+)_
 
-You can execute SQL against any supported type and return desired format.
+You can execute SQL against any supported type and return desired [format](#/formats).
 
 ```python
 import chdb
 res = chdb.query('select version()', 'Pretty'); print(res)
 ```
+<!-- tabs:start -->
 
-###### 🗂️ Work with Parquet or CSV
+###### **🗂️ Parquet/CSV**
 ```python
 # See more data type format in tests/format_output.py
 res = chdb.query('select * from file("data.parquet", Parquet)', 'JSON'); print(res)
@@ -52,7 +53,7 @@ res = chdb.query('select * from file("data.csv", CSV)', 'CSV');  print(res)
 print(f"SQL read {res.rows_read()} rows, {res.bytes_read()} bytes, elapsed {res.elapsed()} seconds")
 ```
 
-##### 🗂️ Query On Pandas DataFrame
+##### **🗂️ Pandas DataFrame**
 ```python
 import chdb.dataframe as cdf
 import pandas as pd
@@ -66,7 +67,7 @@ print(ret_tbl)
 print(ret_tbl.query('select b, sum(a) from __table__ group by b'))
 ```
 
-##### 🗂️ Query with Stateful Session<
+##### **🗂️ Stateful Sessions**
 ```python
 from chdb import session as chs
 
@@ -82,7 +83,7 @@ print("Select from view:\n")
 print(sess.query("SELECT * FROM db_xxx.view_xxx", "Pretty"))
 ```
 
-##### 🗂️ Query with Python DB-API 2.0
+##### **🗂️ Python DB-API 2.0**
 
 ```python
 import chdb.dbapi as dbapi
@@ -97,7 +98,7 @@ cur1.close()
 conn1.close()
 ```
 
-##### 🗂️ Query with UDF (User Defined Functions)
+##### **🗂️ UDF Functions**
 
 ```python
 from chdb.udf import chdb_udf
@@ -109,6 +110,8 @@ def sum_udf(lhs, rhs):
 
 print(query("select sum_udf(12,22)"))
 ```
+
+<!-- tabs:end -->
 
 For more examples, see [examples](examples) and [tests](tests).
 
