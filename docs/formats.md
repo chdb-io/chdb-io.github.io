@@ -1,6 +1,6 @@
 <img src="logo.png" width=100>
 
-## Data Formats
+# Data Formats
 
 Just like ClickHouse, chdb can accept and return data in various formats. 
 
