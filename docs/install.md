@@ -22,7 +22,7 @@ python3 -m chdb "SELECT 1,'abc'" Pretty
 ##### Data Input
 The following methods are available to access on-disk and in-memory data formats:
 
-##### 🗂️ Query on Files_(Parquet, CSV, JSON, Arrow, ORC and 60+)_
+##### 🗂️ Query on Files _(Parquet, CSV, JSON, Arrow, ORC and 60+)_
 
 You can execute SQL against any supported type and return desired format.
 
@@ -75,9 +75,7 @@ print("Select from view:\n")
 print(sess.query("SELECT * FROM db_xxx.view_xxx", "Pretty"))
 ```
 
-see also: [test_stateful.py](tests/test_stateful.py).
-
-#####🗂️ Query with Python DB-API 2.0
+##### 🗂️ Query with Python DB-API 2.0
 
 ```python
 import chdb.dbapi as dbapi
@@ -136,6 +134,8 @@ npm install node-chdb
 ```
 
 #### Usage
+
+##### 🗂️ Query Constructor
 ```javascript
 const chdb = require("chdb-node");
 
@@ -151,16 +151,41 @@ var result = dbdisk.session("SELECT hello()", "TabSeparated"); // optional forma
 console.log(result) // chDB
 ```
 
+##### 🗂️ Query _(query, format)_
+```javascript
+const chdb = require("chdb-node").chdb;
+var result = chdb.Execute("SELECT version()", "CSV");
+console.log(result) // 23.6.1.1
+```
+
+##### 🗂️ Session _(query, *format, *path)_
+```javascript
+const chdb = require("chdb-node").chdb;
+chdb.Session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'")
+var result =  = chdb.Session("SELECT hello();")
+console.log(result) // chDB
+```
+
+> ⚠️ Sessions persist table data to disk. You can specify `path` to implement auto-cleanup strategies:
+```javascript
+const temperment = require("temperment");
+const tmp = temperment.directory();
+chdb.Session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'", "CSV", tmp)
+var result =  = chdb.Session("SELECT hello();")
+console.log(result) // chDB
+tmp.cleanup.sync();
+```
+
 ### **Go**
 
-Golang
+Coming soon
 
 ### **Rust**
 
-Rust
+Coming soon
 
 ### **Bun**
 
-Bun.sh
+Coming soon
 
 <!-- tabs:end -->
