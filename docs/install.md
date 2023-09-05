@@ -36,6 +36,9 @@ The following methods are available to access on-disk and in-memory data formats
 <!-- tabs:start -->
 
 ###### **🗂️ Parquet/CSV**
+
+Use chdb to query any local or remote [file format](https://clickhouse.com/docs/en/interfaces/formats)
+
 ```python
 # See more data type format in tests/format_output.py
 res = chdb.query('select * from file("data.parquet", Parquet)', 'JSON'); print(res)
@@ -44,6 +47,9 @@ print(f"SQL read {res.rows_read()} rows, {res.bytes_read()} bytes, elapsed {res.
 ```
 
 ##### **🗂️ Pandas DataFrame**
+
+Use chdb to interact with the Pandas `Dataframe` format
+
 ```python
 import chdb.dataframe as cdf
 import pandas as pd
@@ -58,6 +64,9 @@ print(ret_tbl.query('select b, sum(a) from __table__ group by b'))
 ```
 
 ##### **🗂️ Stateful Sessions**
+
+Use chdb stateful sessions to persist data between queries in temporary or dedicated folders
+
 ```python
 from chdb import session as chs
 
@@ -75,6 +84,8 @@ print(sess.query("SELECT * FROM db_xxx.view_xxx", "Pretty"))
 
 ##### **🗂️ Python DB-API 2.0**
 
+Use chdb in your scripts through the Python DB-API 2.0
+
 ```python
 import chdb.dbapi as dbapi
 print("chdb driver version: {0}".format(dbapi.get_client_info()))
@@ -90,7 +101,22 @@ conn1.close()
 
 ##### **🗂️ UDF**
 
-Decorator for chDB Python UDF(User Defined Function).
+Easily implement and execute user defined functions in your chdb scripts and queries
+
+```python
+from chdb.udf import chdb_udf
+from chdb import query
+
+@chdb_udf(return_type="Int32")
+def sum_udf(lhs, rhs):
+    return int(lhs) + int(rhs)
+
+print(query("select sum_udf(12,22)"))
+```
+
+
+##### Decorator for chDB Python UDF(User Defined Function)
+
 1. The function should be stateless. So, only UDFs are supported, not UDAFs(User Defined Aggregation Function).
 2. Default return type is String. If you want to change the return type, you can pass in the return type as an argument.
     The return type should be one of the following: https://clickhouse.com/docs/en/sql-reference/data-types
@@ -114,17 +140,6 @@ Decorator for chDB Python UDF(User Defined Function).
         ...
     ```
 6. Python interpertor used is the same as the one used to run the script. Get from `sys.executable`
-
-```python
-from chdb.udf import chdb_udf
-from chdb import query
-
-@chdb_udf(return_type="Int32")
-def sum_udf(lhs, rhs):
-    return int(lhs) + int(rhs)
-
-print(query("select sum_udf(12,22)"))
-```
 
 ##### **🗂️ Query Format**
 
