@@ -7,16 +7,16 @@
   * [SQL Reference](sql.md)
 * Library Bindings
   * Python
-    * [Installation](https://chdb-io.github.io/chdb-docs/#/install?installation-1)
-    * [examples](https://chdb-io.github.io/chdb-docs/#/install?id=usage)
+    * [Installation](#/install?installation-1)
+    * [examples](#/install?id=usage)
     * [chdb-python](https://github.com/chdb-io/chdb)
   * NodeJS
-    * [Installation](https://chdb-io.github.io/chdb-docs/#/install?requuirements)
-    * [examples](https://chdb-io.github.io/chdb-docs/#/install?id=usage-1)
+    * [Installation](#/install?requuirements)
+    * [examples](#/install?id=usage-1)
     * [chdb-node](https://github.com/chdb-io/chdb-node)
   * Go
-    * [Installation](https://chdb-io.github.io/chdb-docs/#/install?requuirements-1)
-    * [examples](https://chdb-io.github.io/chdb-docs/#/install?id=usage-2)
+    * [Installation](#/install?requuirements-1)
+    * [examples](#/install?id=usage-2)
     * [chdn-go](https://github.com/chdb-io/chdb-go)
   * [Rust](https://github.com/chdb-io/chdb-rust)
   * [Bun](https://github.com/chdb-io/chdb-bun)
