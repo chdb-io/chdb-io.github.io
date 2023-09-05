@@ -102,7 +102,8 @@ def sum_udf(lhs, rhs):
 
 print(query("select sum_udf(12,22)"))
 ```
-##### **🗂️ Query Format** 
+
+##### **🗂️ Query Format**
 
 You can execute SQL against any supported type and return any available [format](https://clickhouse.com/docs/en/interfaces/formats) _(Parquet, CSV, JSON, Arrow, ORC and 60+)_
 
