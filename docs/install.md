@@ -21,8 +21,6 @@ pip install chdb
 python3 -m chdb "SELECT 1,'abc'" Pretty
 ```
 
-You can use any [format](https://clickhouse.com/docs/en/interfaces/formats) supported by ClickHouse
-
 
 ##### Run in Python
 
