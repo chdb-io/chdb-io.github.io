@@ -16,9 +16,8 @@
 * Library bindings for [Python](https://github.com/chdb-io/chdb), [Go](https://github.com/chdb-io/chdb-go), [Rust](https://github.com/chdb-io/chdb-rust), [NodeJS](https://github.com/chdb-io/chdb-node), [Bun](https://github.com/chdb-io/chdb-bun)
 * Apache2 License
 
-<br>
-  
-### Project Introduction
+
+#### Project Introduction
 
 * Read the full story about the [birth of the chDB project](https://auxten.com/the-birth-of-chdb/) on Auxten's blog
 * Read about chdb and its usecases on the [Official ClickHouse Blog](https://clickhouse.com/blog/welcome-chdb-to-clickhouse)
@@ -27,6 +26,3 @@
 [video](https://github.com/metrico/libchdb/assets/1423657/162b2a59-1e0d-4d03-b72a-f1d79a0c3d7b ':include :type=video :width=60%')
 
 > [ClickHouse 23.6 Release Webinar](https://youtu.be/cuf_hYn7dqU?t=3059) clip included for Educational purposes. All rights belong to their respective owners.
-
-<br> 
-
