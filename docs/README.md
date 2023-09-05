@@ -18,7 +18,7 @@
 
 <br>
 
-<img src="https://user-images.githubusercontent.com/1423657/265234260-5c0ca795-dcea-438f-9e2c-76fedc88ae04.gif" width=60%>
+<img src="https://user-images.githubusercontent.com/1423657/265234260-5c0ca795-dcea-438f-9e2c-76fedc88ae04.gif" width=50%>
 
   
 ### Introduction
