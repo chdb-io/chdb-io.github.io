@@ -1,6 +1,6 @@
 <div align="left">
   <a href="https://chdb.io">
-    <img src="chdb-snake-dark.png" height="150">
+    <img src="chdb-snake-dark.png" height="150" style="filter: var(--invert);">
   </a>
 </div>
 
