@@ -203,7 +203,7 @@ var result = dbdisk.session("SELECT hello()", "TabSeparated"); // optional forma
 console.log(result) // chDB
 ```
 
-#####  **🗂️ Query**
+#####  **🗂️ Stateless Query**
 | _(query, format)_
 ```javascript
 const chdb = require("chdb-node").chdb;
@@ -211,7 +211,7 @@ var result = chdb.Execute("SELECT version()", "CSV");
 console.log(result) // 23.6.1.1
 ```
 
-##### **🗂️ Session**
+##### **🗂️ Stateful Sessions**
 | _(query, *format, *path)_
 ```javascript
 const chdb = require("chdb-node").chdb;
@@ -220,7 +220,8 @@ var result =  = chdb.Session("SELECT hello();")
 console.log(result) // chDB
 ```
 
-> ⚠️ Sessions persist table data to disk. You can specify `path` to implement auto-cleanup strategies:
+> ⚠️ Sessions persist table data to disk. You can specify `path` to implement auto-cleanup strategies
+> 
 ```javascript
 const temperment = require("temperment");
 const tmp = temperment.directory();
