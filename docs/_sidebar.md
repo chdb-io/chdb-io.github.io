@@ -23,6 +23,7 @@
     * [chdb-bun](https://github.com/chdb-io/chdb-bun)
   * [Libchdb](https://github.com/metrico/libchdb)
 * External Links
+  * [Discord](https://discord.gg/Njw5YXSPPc)
   * [Birth of chdb](https://auxten.com/the-birth-of-chdb/)
   * [ClickHouse & chdb](https://clickhouse.com/blog/welcome-chdb-to-clickhouse)
   * [Team & Contributors](https://github.com/chdb-io/chdb#contributors)
