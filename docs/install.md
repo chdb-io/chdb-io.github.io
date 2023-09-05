@@ -306,5 +306,32 @@ var results = Execute("SELECT version()", "CSV");
 console.log(results);
 ```
 
+### **C/C++**
+
+#### Requirements
+
+<!-- tabs:start -->
+📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
+##### **DEB**
+```bash
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
+sudo apt install libchdb
+```
+##### **RPM**
+```bash
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
+sudo yum install -y libchdb
+```
+<!-- tabs:end -->
+
+#### Usage
+
+Follow the instructions at [chdb-rust](https://github.com/metrico/libchdb) to get started.
+
+### **Custom**
+
+Interested in a new chdb binding? Follow the instructions at [chdb-rust](https://github.com/metrico/libchdb) to get started.
+
+
 
 <!-- tabs:end -->
