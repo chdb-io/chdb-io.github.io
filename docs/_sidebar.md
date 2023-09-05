@@ -6,11 +6,14 @@
   * [Data Formats](formats.md)
   * [SQL Reference](sql.md)
 * [Library Bindings](https://github.com/metrico/libchdb)
-  * [Python](https://github.com/chdb-io/chdb)
+  * Python
+    * [chdb-python](https://github.com/chdb-io/chdb)
     * [examples](https://chdb-io.github.io/chdb-docs/#/install?id=usage)
-  * [NodeJS](https://github.com/chdb-io/chdb-node)
+  * NodeJS
+    * [chdb-node](https://github.com/chdb-io/chdb-node)
     * [examples](https://chdb-io.github.io/chdb-docs/#/install?id=usage-1)
-  * [Go](https://github.com/chdb-io/chdb-go)
+  * Go
+    * [chdn-go](https://github.com/chdb-io/chdb-go)
     * [examples](https://chdb-io.github.io/chdb-docs/#/install?id=usage-2)
   * [Rust](https://github.com/chdb-io/chdb-rust)
   * [Bun](https://github.com/chdb-io/chdb-bun)
