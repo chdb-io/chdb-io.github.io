@@ -326,11 +326,34 @@ sudo yum install -y libchdb
 
 #### Usage
 
-Follow the instructions at [chdb-rust](https://github.com/metrico/libchdb) to get started.
+Follow the instructions for [libchdb](https://github.com/metrico/libchdb) to get started.
+
+##### chdb.h
+```c
+#pragma once
+#include <cstdint>
+#include <stddef.h>
+
+extern "C" {
+struct local_result
+{
+    char * buf;
+    size_t len;
+    void * _vec; // std::vector<char> *, for freeing
+    double elapsed;
+    uint64_t rows_read;
+    uint64_t bytes_read;
+};
+
+local_result * query_stable(int argc, char ** argv);
+void free_result(local_result * result);
+}
+```
 
 ### **Custom**
 
-Interested in a new chdb binding? Follow the instructions at [chdb-rust](https://github.com/metrico/libchdb) to get started.
+Bootstrapping a new **chdb binding**?<br>
+Follow the instructions for [libchdb](https://github.com/metrico/libchdb) to get started.
 
 
 
