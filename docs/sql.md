@@ -6,6 +6,8 @@
 
 Please refer to the [ClickHouse SQL Documentation](https://clickhouse.com/docs/en/sql-reference) for further information and examples.
 
+**chdb** supports the same _SQL Syntax, Statements, Engines and Functions_ as ClickHouse:
+
 * [SQL Syntax](https://clickhouse.com/docs/en/sql-reference/syntax)
 * [Statements](https://clickhouse.com/docs/en/sql-reference/statements)
 * [Table Engines](https://clickhouse.com/docs/en/engines/table-engines)
