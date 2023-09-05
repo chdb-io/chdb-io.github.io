@@ -29,7 +29,7 @@ You can use any [format](https://clickhouse.com/docs/en/interfaces/formats) supp
 ```python
 chdb.query('select * from file("data.parquet", Parquet)', 'Dataframe')
 ```
-Queries can return data using any [supported format](https://clickhouse.com/docs/en/interfaces/formats as well as `Dataframe` and `Debug`
+Queries can return data using any [supported format](https://clickhouse.com/docs/en/interfaces/formats) as well as `Dataframe` and `Debug`
 
 
 ##### Data Input
