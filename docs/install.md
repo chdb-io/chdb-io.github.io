@@ -147,7 +147,7 @@ npm install node-chdb
 
 <!-- tabs:start -->
 
-##### **🗂️ Query Constructor**
+##### **🗂️ Constructor**
 ```javascript
 const chdb = require("chdb-node");
 
@@ -163,14 +163,16 @@ var result = dbdisk.session("SELECT hello()", "TabSeparated"); // optional forma
 console.log(result) // chDB
 ```
 
-##### 🗂️ **Query _(query, format)_**
+##### 🗂️ **Query**
+| _(query, format)_
 ```javascript
 const chdb = require("chdb-node").chdb;
 var result = chdb.Execute("SELECT version()", "CSV");
 console.log(result) // 23.6.1.1
 ```
 
-##### 🗂️ **Session _(query, *format, *path)_**
+##### 🗂️ **Session**
+| _(query, *format, *path)_
 ```javascript
 const chdb = require("chdb-node").chdb;
 chdb.Session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'")
