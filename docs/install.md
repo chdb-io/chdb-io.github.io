@@ -35,14 +35,6 @@ Queries can return data using any [supported format](https://clickhouse.com/docs
 ##### Data Input
 The following methods are available to access on-disk and in-memory data formats
 
-##### 🗂️ Query on Files _(Parquet, CSV, JSON, Arrow, ORC and 60+)_
-
-You can execute SQL against any supported type and return desired [format](https://clickhouse.com/docs/en/interfaces/formats.
-
-```python
-import chdb
-res = chdb.query('select version()', 'Pretty'); print(res)
-```
 <!-- tabs:start -->
 
 ###### **🗂️ Parquet/CSV**
@@ -98,7 +90,7 @@ cur1.close()
 conn1.close()
 ```
 
-##### **🗂️ UDF Functions**
+##### **🗂️ UDF**
 
 ```python
 from chdb.udf import chdb_udf
@@ -109,6 +101,15 @@ def sum_udf(lhs, rhs):
     return int(lhs) + int(rhs)
 
 print(query("select sum_udf(12,22)"))
+```
+##### **🗂️ Query Format** 
+
+You can execute SQL against any supported type and return any available [format](https://clickhouse.com/docs/en/interfaces/formats) _(Parquet, CSV, JSON, Arrow, ORC and 60+)_
+
+```python
+import chdb
+res = chdb.query('select version()', 'Pretty');
+print(res)
 ```
 
 <!-- tabs:end -->
