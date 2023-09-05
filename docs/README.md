@@ -16,7 +16,13 @@
 * Library bindings for [Python](https://github.com/chdb-io/chdb), [Go](https://github.com/chdb-io/chdb-go), [Rust](https://github.com/chdb-io/chdb-rust), [NodeJS](https://github.com/chdb-io/chdb-node), [Bun](https://github.com/chdb-io/chdb-bun)
 * Apache License, Version 2.0
 
+<br>
 
+#### About us
+We are a community of hackers led by [@Auxten](https://auxten.com/) and powered by our love for data and opensource.<br>
+Our goal is to create a powerful and high-performance embedded database engine for you to love.
+
+<br>
 
 
 #### Project Introduction
