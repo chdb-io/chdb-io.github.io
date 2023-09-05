@@ -18,6 +18,8 @@
 
 <br>
 
+<img src="https://user-images.githubusercontent.com/1423657/265234260-5c0ca795-dcea-438f-9e2c-76fedc88ae04.gif" width=60%>
+
   
 ### Introduction
 
@@ -25,7 +27,7 @@
 * Read about chdb and its usecases on the [Official ClickHouse Blog](https://clickhouse.com/blog/welcome-chdb-to-clickhouse)
 * Listen to a brief project introduction courtesy of our hero **Alexey Milovidov**, _the father of ClickHouse_.
 
-[video](https://github.com/metrico/libchdb/assets/1423657/162b2a59-1e0d-4d03-b72a-f1d79a0c3d7b ':include :type=video :width=50%')
+[video](https://github.com/metrico/libchdb/assets/1423657/162b2a59-1e0d-4d03-b72a-f1d79a0c3d7b ':include :type=video :width=60%')
 
 > [ClickHouse 23.6 Release Webinar](https://youtu.be/cuf_hYn7dqU?t=3059) clip included for Educational purposes. All rights belong to their respective owners.
 
