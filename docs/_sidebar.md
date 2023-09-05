@@ -22,3 +22,4 @@
   * [Birth of chdb](https://auxten.com/the-birth-of-chdb/)
   * [ClickHouse & chdb](https://clickhouse.com/blog/welcome-chdb-to-clickhouse)
   * [Team & Contributors](https://github.com/chdb-io/chdb#contributors)
+  * [Sponsor chdb 💛](https://github.com/sponsors/chdb-io)
