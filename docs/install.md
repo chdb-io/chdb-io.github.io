@@ -187,7 +187,10 @@ npm install node-chdb
 
 <!-- tabs:start -->
 
-##### **🗂️ Constructor**
+##### **🗂️ Query Constructor**
+
+You can leverage the power of chdb in your NodeJS applications by importing and using the `chdb-node` module
+
 ```javascript
 const chdb = require("chdb-node");
 
@@ -204,7 +207,7 @@ console.log(result) // chDB
 ```
 
 #####  **🗂️ Stateless Query**
-| _(query, format)_
+Run stateless chdb queries using the `Execute` function with parameters _(query, format)_
 ```javascript
 const chdb = require("chdb-node").chdb;
 var result = chdb.Execute("SELECT version()", "CSV");
@@ -212,7 +215,7 @@ console.log(result) // 23.6.1.1
 ```
 
 ##### **🗂️ Stateful Sessions**
-| _(query, *format, *path)_
+Run stateful chdb sessions using the `Session` function with parameters _(query, *format, *path)_
 ```javascript
 const chdb = require("chdb-node").chdb;
 chdb.Session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'")
