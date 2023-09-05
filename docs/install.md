@@ -90,11 +90,36 @@ conn1.close()
 
 ##### **🗂️ UDF**
 
+Decorator for chDB Python UDF(User Defined Function).
+1. The function should be stateless. So, only UDFs are supported, not UDAFs(User Defined Aggregation Function).
+2. Default return type is String. If you want to change the return type, you can pass in the return type as an argument.
+    The return type should be one of the following: https://clickhouse.com/docs/en/sql-reference/data-types
+3. The function should take in arguments of type String. As the input is TabSeparated, all arguments are strings.
+4. The function will be called for each line of input. Something like this:
+    ```python
+    def sum_udf(lhs, rhs):
+        return int(lhs) + int(rhs)
+
+    for line in sys.stdin:
+        args = line.strip().split('\t')
+        lhs = args[0]
+        rhs = args[1]
+        print(sum_udf(lhs, rhs))
+        sys.stdout.flush()
+    ```
+5. The function should be pure python function. You SHOULD import all python modules used IN THE FUNCTION.
+    ```python
+    def func_use_json(arg):
+        import json
+        ...
+    ```
+6. Python interpertor used is the same as the one used to run the script. Get from `sys.executable`
+
 ```python
 from chdb.udf import chdb_udf
 from chdb import query
 
-@chdb_udf()
+@chdb_udf(return_type="Int32")
 def sum_udf(lhs, rhs):
     return int(lhs) + int(rhs)
 
