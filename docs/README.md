@@ -18,7 +18,7 @@
 
 <br>
   
-### Introduction
+### Project Introduction
 
 * Read the full story about the [birth of the chDB project](https://auxten.com/the-birth-of-chdb/) on Auxten's blog
 * Read about chdb and its usecases on the [Official ClickHouse Blog](https://clickhouse.com/blog/welcome-chdb-to-clickhouse)
