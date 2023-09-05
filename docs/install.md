@@ -351,9 +351,8 @@ void free_result(local_result * result);
 ```
 
 ### **Custom**
-
-Bootstrapping a new **chdb binding**?<br>
-Follow the instructions for [libchdb](https://github.com/metrico/libchdb) to get started.
+#### Next Binding?
+Bootstrapping a new **chdb binding**? Follow the instructions for [libchdb](https://github.com/metrico/libchdb) to get started.
 
 
 
