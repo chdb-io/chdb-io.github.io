@@ -2,6 +2,10 @@
 
 # Data Formats
 
+| chdb is 100% feature compatible with ClickHouse 🚀
+
+Please refer to the [ClickHouse SQL Documentation](https://clickhouse.com/docs/en/sql-reference) for further information and examples.
+
 Just like ClickHouse, chdb can accept and return data in various formats. 
 
 - Input formats are used to parse the data provided to `INSERT` and `SELECT` from a file-backed table such as File, URL or S3. 
