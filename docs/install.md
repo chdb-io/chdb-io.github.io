@@ -163,7 +163,7 @@ var result = dbdisk.session("SELECT hello()", "TabSeparated"); // optional forma
 console.log(result) // chDB
 ```
 
-##### 🗂️ **Query**
+#####  **🗂️ Query**
 | _(query, format)_
 ```javascript
 const chdb = require("chdb-node").chdb;
@@ -171,7 +171,7 @@ var result = chdb.Execute("SELECT version()", "CSV");
 console.log(result) // 23.6.1.1
 ```
 
-##### 🗂️ **Session**
+##### **🗂️ Session**
 | _(query, *format, *path)_
 ```javascript
 const chdb = require("chdb-node").chdb;
