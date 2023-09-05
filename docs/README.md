@@ -33,6 +33,6 @@
 
 -----------
 
-<div align="left" style="font-size: 8px;">
+<div align="left" style="font-size: 12px;">
 ClickHouse® is a trademark of ClickHouse Inc. All trademarks, service marks, and logos mentioned or depicted are the property of their respective owners. The use of any third-party trademarks, brand names, product names, and company names does not imply endorsement, affiliation, or association with the respective owners. 
 </div>
