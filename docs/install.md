@@ -146,7 +146,7 @@ For more examples, see [examples](examples) and [tests](tests).
 
 ### **NodeJS**
 
-#### Requuirements
+#### Requirements
 
 <!-- tabs:start -->
 📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
@@ -218,7 +218,7 @@ tmp.cleanup.sync();
 
 ### **Go**
 
-#### Requuirements
+#### Requirements
 
 <!-- tabs:start -->
 📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
@@ -256,10 +256,55 @@ func main() {
 
 ### **Rust**
 
-Coming soon
+#### Requirements
+
+<!-- tabs:start -->
+📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
+##### **DEB**
+```bash
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
+sudo apt install libchdb
+```
+##### **RPM**
+```bash
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
+sudo yum install -y libchdb
+```
+<!-- tabs:end -->
+
+#### Usage
+
+This binding is a work in progress. Follow the instructions at [chdb-rust](https://github.com/chdb-io/chdb-rust) to get started.
 
 ### **Bun**
 
-Coming soon
+#### Requirements
+
+<!-- tabs:start -->
+📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
+##### **DEB**
+```bash
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
+sudo apt install libchdb
+```
+##### **RPM**
+```bash
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
+sudo yum install -y libchdb
+```
+<!-- tabs:end -->
+
+#### Installation
+```bash
+bun install chdb-bun
+```
+
+#### Usage
+```javascript
+import { Execute } from 'chdb-bun';
+var results = Execute("SELECT version()", "CSV");
+console.log(results);
+```
+
 
 <!-- tabs:end -->
