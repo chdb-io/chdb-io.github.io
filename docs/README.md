@@ -4,11 +4,11 @@
   </a>
 </div>
 
-> chDB is an embedded SQL OLAP Engine powered by ClickHouse
+> chDB is an embedded SQL OLAP Engine powered by ClickHouse®
 
 ### Features
      
-* In-process SQL OLAP Engine, powered by [ClickHouse](https://github.com/clickhouse/clickhouse) [^1]
+* In-process SQL OLAP Engine, powered by [ClickHouse](https://github.com/clickhouse/clickhouse)
 * Serverless. No need to install ClickHouse
 * Minimized data copy from C++ to Python with [python memoryview](https://docs.python.org/3/c-api/memoryview.html)
 * Input & Output support Parquet, CSV, JSON, Arrow, ORC and 60+[more](https://clickhouse.com/docs/en/interfaces/formats) formats
@@ -33,4 +33,6 @@
 
 -----------
 
-[^1]: ClickHouse® is a trademark of ClickHouse Inc. All trademarks, service marks, and logos mentioned or depicted are the property of their respective owners. The use of any third-party trademarks, brand names, product names, and company names does not imply endorsement, affiliation, or association with the respective owners. 
+<div align="left" style="font-size: 8px;">
+ClickHouse® is a trademark of ClickHouse Inc. All trademarks, service marks, and logos mentioned or depicted are the property of their respective owners. The use of any third-party trademarks, brand names, product names, and company names does not imply endorsement, affiliation, or association with the respective owners. 
+</div>
