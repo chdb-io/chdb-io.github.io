@@ -6,6 +6,9 @@
 
 ### **Python**
 
+#### Requirements
+* Python 3.8 _or higher_
+
 #### Installation
 ```bash
 pip install chdb
