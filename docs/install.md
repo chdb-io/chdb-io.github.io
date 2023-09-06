@@ -33,7 +33,7 @@ chdb.query('select * from file("data.parquet", Parquet)', 'Dataframe')
 Queries can return data using any [supported format](https://clickhouse.com/docs/en/interfaces/formats) as well as `Dataframe` and `Debug`
 
 
-##### Data Input
+##### Eamples
 The following methods are available to access on-disk and in-memory data formats
 
 <!-- tabs:start -->
