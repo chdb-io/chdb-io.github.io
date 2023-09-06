@@ -22,6 +22,8 @@
 We are a community of hackers led by [@Auxten](https://auxten.com/) and powered by our love for data and opensource.<br>
 Our goal is to create a powerful and high-performance embedded database engine for you to love.
 
+<a href="https://chdb.io" target="_blank"><img src="https://contributors-img.web.app/image?repo=chdb-io/chdb" width=300></a>
+
 <br>
 
 
