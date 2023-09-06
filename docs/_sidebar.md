@@ -22,6 +22,8 @@
     * [examples](/install?id=installation-4)
     * [chdb-bun](https://github.com/chdb-io/chdb-bun)
   * [Libchdb](https://github.com/metrico/libchdb)
+* Integrations
+  * [JupySQL](https://jupysql.ploomber.io/en/latest/integrations/chdb.html) 
 * External Links
   * [Discord](https://discord.gg/Njw5YXSPPc)
   * [Birth of chdb](https://auxten.com/the-birth-of-chdb/)
