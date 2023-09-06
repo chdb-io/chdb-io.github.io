@@ -153,7 +153,7 @@ print(res)
 
 <!-- tabs:end -->
 
-For more examples, see [examples](examples) and [tests](tests).
+For more examples, see [https://github.com/chdb-io/chdb/tree/main/examples](examples) and [tests]([tests](https://github.com/chdb-io/chdb/tree/main/tests)).
 
 <br>
 
