@@ -168,14 +168,29 @@ For more examples, see [https://github.com/chdb-io/chdb/tree/main/examples](exam
 
 <!-- tabs:start -->
 📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
+##### **Manual**
+<!-- tabs:start -->
+#### **AMD64**
+```bash
+wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
+unzip libchdb.zip
+mv libchdb.so /usr/lib/libchdb.so
+```
+#### **ARM64**
+```
+wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
+unzip libchdb_arm64.zip
+mv libchdb.so /usr/lib/libchdb.so
+```
+<!-- tabs:end -->
 ##### **DEB**
 ```bash
-sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/qxip/chdb/script.deb.sh | os=any dist=any bash'
 sudo apt install libchdb
 ```
 ##### **RPM**
 ```bash
-sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/qxip/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
 sudo yum install -y libchdb
 ```
 <!-- tabs:end -->
@@ -244,14 +259,29 @@ tmp.cleanup.sync();
 
 <!-- tabs:start -->
 📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
+##### **Manual**
+<!-- tabs:start -->
+#### **AMD64**
+```bash
+wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
+unzip libchdb.zip
+mv libchdb.so /usr/lib/libchdb.so
+```
+#### **ARM64**
+```
+wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
+unzip libchdb_arm64.zip
+mv libchdb.so /usr/lib/libchdb.so
+```
+<!-- tabs:end -->
 ##### **DEB**
 ```bash
-sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/qxip/chdb/script.deb.sh | os=any dist=any bash'
 sudo apt install libchdb
 ```
 ##### **RPM**
 ```bash
-sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/qxip/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
 sudo yum install -y libchdb
 ```
 <!-- tabs:end -->
@@ -282,14 +312,29 @@ func main() {
 
 <!-- tabs:start -->
 📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
+##### **Manual**
+<!-- tabs:start -->
+#### **AMD64**
+```bash
+wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
+unzip libchdb.zip
+mv libchdb.so /usr/lib/libchdb.so
+```
+#### **ARM64**
+```
+wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
+unzip libchdb_arm64.zip
+mv libchdb.so /usr/lib/libchdb.so
+```
+<!-- tabs:end -->
 ##### **DEB**
 ```bash
-sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/qxip/chdb/script.deb.sh | os=any dist=any bash'
 sudo apt install libchdb
 ```
 ##### **RPM**
 ```bash
-sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/qxip/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
 sudo yum install -y libchdb
 ```
 <!-- tabs:end -->
@@ -304,14 +349,29 @@ This binding is a work in progress. Follow the instructions at [chdb-rust](https
 
 <!-- tabs:start -->
 📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
+##### **Manual**
+<!-- tabs:start -->
+#### **AMD64**
+```bash
+wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
+unzip libchdb.zip
+mv libchdb.so /usr/lib/libchdb.so
+```
+#### **ARM64**
+```
+wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
+unzip libchdb_arm64.zip
+mv libchdb.so /usr/lib/libchdb.so
+```
+<!-- tabs:end -->
 ##### **DEB**
 ```bash
-sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/qxip/chdb/script.deb.sh | os=any dist=any bash'
 sudo apt install libchdb
 ```
 ##### **RPM**
 ```bash
-sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/qxip/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
 sudo yum install -y libchdb
 ```
 <!-- tabs:end -->
@@ -334,14 +394,29 @@ console.log(results);
 
 <!-- tabs:start -->
 📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
+##### **Manual**
+<!-- tabs:start -->
+#### **AMD64**
+```bash
+wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
+unzip libchdb.zip
+mv libchdb.so /usr/lib/libchdb.so
+```
+#### **ARM64**
+```
+wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
+unzip libchdb_arm64.zip
+mv libchdb.so /usr/lib/libchdb.so
+```
+<!-- tabs:end -->
 ##### **DEB**
 ```bash
-sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.deb.sh | os=any dist=any bash'
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/qxip/chdb/script.deb.sh | os=any dist=any bash'
 sudo apt install libchdb
 ```
 ##### **RPM**
 ```bash
-sudo bash -c 'curl -s https://packagecloud.io/install/repositories/auxten/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
+sudo bash -c 'curl -s https://packagecloud.io/install/repositories/qxip/chdb/script.rpm.sh | os=rpm_any dist=rpm_any bash'
 sudo yum install -y libchdb
 ```
 <!-- tabs:end -->
