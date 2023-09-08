@@ -7,7 +7,7 @@
 ### **Python**
 
 #### Requirements
-* Python 3.8+ on macOS and Linux _(x86_64 and ARM64)_
+* Python 3.8+ on macOS and Linux (x86_64 and ARM64)
 
 #### Installation
 ```bash
