@@ -384,8 +384,7 @@ bun install chdb-bun
 #### Usage
 ```javascript
 import { Execute } from 'chdb-bun';
-var results = Execute("SELECT version()", "CSV");
-console.log(results);
+console.log(Execute("SELECT version()", "CSV"));
 ```
 
 ### **C/C++**
