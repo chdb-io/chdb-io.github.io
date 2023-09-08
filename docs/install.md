@@ -175,9 +175,9 @@ For more examples, see [https://github.com/chdb-io/chdb/tree/main/examples](exam
 wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
 unzip libchdb.zip
 mv libchdb.so /usr/lib/libchdb.so
-```bash
-#### **ARM64**
 ```
+#### **ARM64**
+```bash
 wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
 unzip libchdb_arm64.zip
 mv libchdb.so /usr/lib/libchdb.so
