@@ -16,19 +16,10 @@ pip install chdb
 
 #### Usage
 
-##### Run in command line
-
 | `python3 -m chdb [SQL] [OutputFormat]` 
 
 ```bash
 python3 -m chdb "SELECT 1,'abc'" Pretty
-```
-
-
-##### Run in Python
-
-```python
-chdb.query('select * from file("data.parquet", Parquet)', 'Dataframe')
 ```
 Queries can return data using any [supported format](https://clickhouse.com/docs/en/interfaces/formats) as well as `Dataframe` and `Debug`
 
