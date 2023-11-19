@@ -390,8 +390,13 @@ bun install chdb-bun
 ```js
 import { db } from 'chdb-bun';
 
+// Query (ephemeral)
 const conn = new db('CSV')
-console.log(conn.query("SELECT version()"));
+console.log(conn.query("SELECT version()")); // 23.10.1.1
+
+// Query Session (persistent)
+conn.session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'");
+console.log(conn.session("SELECT hello()", "CSV")); // chDB
 ```
 
 ##### **🗂️ Query _(query, *format)_ **
@@ -411,8 +416,7 @@ const conn = new db('CSV', '/tmp')
 
 // Query Session (persistent)
 conn.session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'");
-result = conn.session("SELECT hello()", "CSV");
-console.log(result)
+console.logconn.session("SELECT hello()", "CSV"));
 ```
 
 > ⚠️ Sessions persist table data to disk. You can specify `path` to implement auto-cleanup strategies:
