@@ -69,11 +69,15 @@ sess = chs.Session()
 sess.query("CREATE DATABASE IF NOT EXISTS db_xxx ENGINE = Atomic")
 sess.query("CREATE TABLE IF NOT EXISTS db_xxx.log_table_xxx (x String, y Int) ENGINE = Log;")
 sess.query("INSERT INTO db_xxx.log_table_xxx VALUES ('a', 1), ('b', 3), ('c', 2), ('d', 5);")
-sess.query(
-    "CREATE VIEW db_xxx.view_xxx AS SELECT * FROM db_xxx.log_table_xxx LIMIT 4;"
-)
+sess.query("CREATE VIEW db_xxx.view_xxx AS SELECT * FROM db_xxx.log_table_xxx LIMIT 4;")
+
 print("Select from view:\n")
 print(sess.query("SELECT * FROM db_xxx.view_xxx", "Pretty"))
+```
+
+Use a dedicated folder to reattach the same storage and tables to each session
+```
+sess = chs.Session('/tmp/mysession')
 ```
 
 ##### **🗂️ Python DB-API 2.0**
@@ -379,10 +383,50 @@ bun install chdb-bun
 ```
 
 #### Usage
-```javascript
-import { Execute } from 'chdb-bun';
-console.log(Execute("SELECT version()", "CSV"));
+
+<!-- tabs:start -->
+
+##### **🗂️ Query Constructor**
+```js
+import { db } from 'chdb-bun';
+
+const conn = new db('CSV')
+console.log(conn.query("SELECT version()"));
 ```
+
+##### **🗂️ Query _(query, *format)_ **
+```javascript
+import { db } from 'chdb-bun';
+const conn = new db('CSV')
+
+// Query (ephemeral)
+var result = conn.query("SELECT version()", "CSV");
+console.log(result) // 23.10.1.1
+```
+
+##### **🗂️ Session _(query, *format, *path)_**
+```javascript
+import { db } from 'chdb-bun';
+const conn = new db('CSV', '/tmp')
+
+// Query Session (persistent)
+conn.session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'");
+result = conn.session("SELECT hello()", "CSV");
+console.log(result)
+```
+
+> ⚠️ Sessions persist table data to disk. You can specify `path` to implement auto-cleanup strategies:
+```javascript
+const temperment = require("temperment");
+const tmp = temperment.directory();
+conn.session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'", "CSV", tmp)
+var result =  = chdb.Session("SELECT hello();")
+console.log(result) // chDB
+tmp.cleanup.sync();
+```
+
+<!-- tabs:end -->
+
 
 ### **C/C++**
 
