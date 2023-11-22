@@ -24,7 +24,7 @@ python3 -m chdb "SELECT 1,'abc'" Pretty
 Queries can return data using any [supported format](https://clickhouse.com/docs/en/interfaces/formats) as well as `Dataframe` and `Debug`
 
 
-##### Eamples
+##### Examples
 The following methods are available to access on-disk and in-memory data formats
 
 <!-- tabs:start -->
