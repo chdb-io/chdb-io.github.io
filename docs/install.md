@@ -193,7 +193,7 @@ sudo yum install -y libchdb
 
 #### Installation
 ```bash
-npm install node-chdb
+npm install chdb-node
 ```
 
 #### Usage
