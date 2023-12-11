@@ -31,12 +31,12 @@ Our goal is to create a powerful and high-performance embedded database engine f
 
 * Read the full story about the [birth of the chDB project](https://auxten.com/the-birth-of-chdb/) on Auxten's blog
 * Read about chdb and its usecases on the [Official ClickHouse Blog](https://clickhouse.com/blog/welcome-chdb-to-clickhouse)
+* Discover **chdb** in your browser using [codapi examples](https://antonz.org/trying-chdb/)
 * Listen to a brief project introduction courtesy of our hero **Alexey Milovidov**, _the father of ClickHouse_.
 
 [video](https://github.com/metrico/libchdb/assets/1423657/162b2a59-1e0d-4d03-b72a-f1d79a0c3d7b ':include :type=video :width=60%')
 
 > [ClickHouse 23.6 Release Webinar](https://youtu.be/cuf_hYn7dqU?t=3059) clip included for Educational purposes. All rights belong to their respective owners.
-
 
 
 -----------
