@@ -167,7 +167,7 @@ You can execute SQL against any supported type and return any available [format]
 
 ```python
 import chdb
-res = chdb.query('select version()', 'PrettyCompactNoEscapes');
+res = chdb.query('select chdb(), version()', 'PrettyCompactNoEscapes');
 print(res)
 ```
 
