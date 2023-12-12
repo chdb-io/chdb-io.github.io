@@ -34,11 +34,20 @@ The following methods are available to access on-disk and in-memory data formats
 Use chdb to query any local or remote [file format](https://clickhouse.com/docs/en/interfaces/formats)
 
 ```python
+import chdb
+
 # See more data type format in tests/format_output.py
-res = chdb.query('select * from file("data.parquet", Parquet)', 'JSON'); print(res)
-res = chdb.query('select * from file("data.csv", CSV)', 'CSV');  print(res)
+res = chdb.query('select * from file("data.parquet", Parquet) limit 3', 'JSON')
+print(res)
+
+res = chdb.query('select * from file("data.csv", CSV)', 'CSV')
+print(res)
+
 print(f"SQL read {res.rows_read()} rows, {res.bytes_read()} bytes, elapsed {res.elapsed()} seconds")
 ```
+
+<codapi-snippet sandbox="chdb-python" editor="basic" files="data/data.csv data/data.parquet">
+</codapi-snippet>
 
 ##### **🗂️ Pandas DataFrame**
 
@@ -53,9 +62,14 @@ df2 = pd.DataFrame({'c': [1, 2, 3], 'd': ["①", "②", "③"]})
 ret_tbl = cdf.query(sql="select * from __tbl1__ t1 join __tbl2__ t2 on t1.a = t2.c",
                   tbl1=df1, tbl2=df2)
 print(ret_tbl)
+print()
+
 # Query on the DataFrame Table
 print(ret_tbl.query('select b, sum(a) from __table__ group by b'))
 ```
+
+<codapi-snippet sandbox="chdb-python" editor="basic">
+</codapi-snippet>
 
 ##### **🗂️ Stateful Sessions**
 
@@ -72,8 +86,11 @@ sess.query("INSERT INTO db_xxx.log_table_xxx VALUES ('a', 1), ('b', 3), ('c', 2)
 sess.query("CREATE VIEW db_xxx.view_xxx AS SELECT * FROM db_xxx.log_table_xxx LIMIT 4;")
 
 print("Select from view:\n")
-print(sess.query("SELECT * FROM db_xxx.view_xxx", "Pretty"))
+print(sess.query("SELECT * FROM db_xxx.view_xxx", "PrettyCompactNoEscapes"))
 ```
+
+<codapi-snippet sandbox="chdb-python" editor="basic">
+</codapi-snippet>
 
 Use a dedicated folder to reattach the same storage and tables to each session
 ```
@@ -97,6 +114,9 @@ cur1.close()
 conn1.close()
 ```
 
+<codapi-snippet sandbox="chdb-python" editor="basic">
+</codapi-snippet>
+
 ##### **🗂️ UDF**
 
 Easily implement and execute user defined functions in your chdb scripts and queries
@@ -112,6 +132,8 @@ def sum_udf(lhs, rhs):
 print(query("select sum_udf(12,22)"))
 ```
 
+<codapi-snippet sandbox="chdb-python" editor="basic">
+</codapi-snippet>
 
 ##### Decorator for chDB Python UDF(User Defined Function)
 
@@ -145,9 +167,12 @@ You can execute SQL against any supported type and return any available [format]
 
 ```python
 import chdb
-res = chdb.query('select version()', 'Pretty');
+res = chdb.query('select version()', 'PrettyCompactNoEscapes');
 print(res)
 ```
+
+<codapi-snippet sandbox="chdb-python" editor="basic">
+</codapi-snippet>
 
 <!-- tabs:end -->
 
