@@ -8,3 +8,5 @@
 
 This repository contains the public site for [chdb](https://doc.chdb.io) powered by [docsify](https://docsify.js.org/)
 
+[![Star History](https://api.star-history.com/svg?repos=chdb-io/chdb&type=Date)](https://star-history.com/#chdb-io/chdb&Date)
+
