@@ -317,11 +317,9 @@ chDB Python UDF requirements:
     ```
 6. Python interpertor used is the same as the one used to run the script. Get from `sys.executable`
 
+<br>
 
-<!-- tabs:end -->
-<!-- tabs:start -->
-
-#### **Python DB API**  
+#### Python DB API
 
 The chDB Python package adheres to the Python DB API ([PEP 249](https://peps.python.org/pep-0249/)), so you can use it just like you'd use stdlib's `sqlite3` module:
 
