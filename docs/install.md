@@ -47,9 +47,8 @@ import chdb
 </script>
 
 <!-- tabs:end -->
-
-
 <!-- tabs:start -->
+
 #### ** SQL dialect **
 
 chDB is a wrapper around ClickHouse, so it supports exactly the same [SQL syntax](https://clickhouse.com/docs/en/sql-reference/syntax), including joins, CTEs, set operations, aggregations and window functions.
@@ -92,7 +91,6 @@ Note a couple of things here:
 - The second argument to the `query` method specifies the output format. There are many [supported formats](/formats) such as `CSV`, `SQLInsert`, `JSON` and `XML` (try changing the format in the above example and re-running the code). The default one is `CSV`.
 
 <!-- tabs:end -->
-
 <!-- tabs:start -->
 
 #### **Reading data**
@@ -156,7 +154,6 @@ print(res, end="")
 </codapi-snippet>
 
 <!-- tabs:end -->
-
 <!-- tabs:start -->
 
 #### **Writing data**
@@ -208,7 +205,12 @@ frame.info()
 <codapi-snippet sandbox="chdb-python" editor="basic" template="#main.py" files="data/employees.csv">
 </codapi-snippet>
 
-To persist a chDB session to a specific folder on disk, use the `path` constructor parameter. This way you can restore the session later:
+<!-- tabs:end -->
+<!-- tabs:start -->
+
+#### **Persistent Sessions**
+
+To persist a chDB persistent session to a specific folder on disk, use the `path` constructor parameter. This way you can restore the session later:
 
 ```python
 from chdb.session import Session
@@ -247,7 +249,6 @@ print(res, end="")
 </codapi-snippet>
 
 <!-- tabs:end -->
-
 <!-- tabs:start -->
 
 #### **User-defined functions**
@@ -316,8 +317,8 @@ chDB Python UDF requirements:
     ```
 6. Python interpertor used is the same as the one used to run the script. Get from `sys.executable`
 
-<!-- tabs:end -->
 
+<!-- tabs:end -->
 <!-- tabs:start -->
 
 #### **Python Database API**  
@@ -340,9 +341,9 @@ with closing(dbapi.connect()) as conn:
 <codapi-snippet sandbox="chdb-python" editor="basic">
 </codapi-snippet>
 
-<!-- tabs:end -->
-
 For more examples, see [examples](https://github.com/chdb-io/chdb/tree/main/examples) and [tests](https://github.com/chdb-io/chdb/tree/main/tests).
+
+<!-- tabs:end -->
 
 <br>
 
