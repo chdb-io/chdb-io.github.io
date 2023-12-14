@@ -19,123 +19,258 @@ pip install chdb
 | `python3 -m chdb [SQL] [OutputFormat]` 
 
 ```bash
-python3 -m chdb "SELECT 1,'abc'" Pretty
+python3 -m chdb "select 1, 'abc'" Pretty
 ```
-Queries can return data using any [supported format](https://clickhouse.com/docs/en/interfaces/formats) as well as `Dataframe` and `Debug`
 
-
-##### Examples
-The following methods are available to access on-disk and in-memory data formats
-
-<!-- tabs:start -->
-
-###### **🗂️ Parquet/CSV**
-
-Use chdb to query any local or remote [file format](https://clickhouse.com/docs/en/interfaces/formats)
+Or:
 
 ```python
 import chdb
 
-# See more data type format in tests/format_output.py
-res = chdb.query('select * from file("data.parquet", Parquet) limit 3', 'JSON')
-print(res)
-
-res = chdb.query('select * from file("data.csv", CSV)', 'CSV')
-print(res)
-
-print(f"SQL read {res.rows_read()} rows, {res.bytes_read()} bytes, elapsed {res.elapsed()} seconds")
+res = chdb.query("select 1, 'abc'", "CSV")
+print(res, end="")
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic" files="data/data.csv data/data.parquet">
+<codapi-snippet sandbox="chdb-python" editor="basic">
 </codapi-snippet>
 
-##### **🗂️ Pandas DataFrame**
+Queries can return data using any [supported format](https://clickhouse.com/docs/en/interfaces/formats) as well as `Dataframe` and `Debug`.
 
-Use chdb to interact with the Pandas `Dataframe` format
+<script id="main.py" type="text/plain">
+import chdb
+
+##CODE##
+</script>
+
+#### SQL dialect
+
+chDB is a wrapper around ClickHouse, so it supports exactly the same [SQL syntax](https://clickhouse.com/docs/en/sql-reference/syntax), including joins, CTEs, set operations, aggregations and window functions.
+
+For example, let's create a sampled table of 10000 random numbers and calculate the mean and 95th percentile:
+
+```python
+from chdb.session import Session
+
+db = Session()
+db.query("create database db")
+db.query("use db")
+
+db.query("""
+create table data (id UInt32, x UInt32)
+engine MergeTree order by id sample by id
+as
+select number+1 as id, randUniform(1, 100) as x
+from numbers(10000);
+""")
+
+query_sql = """
+select
+  avg(x) as "avg",
+  round(quantile(0.95)(x), 2) as p95
+from data
+sample 0.1;
+"""
+
+res = db.query(query_sql, "PrettyCompactNoEscapes")
+print(res, end="")
+```
+
+<codapi-snippet sandbox="chdb-python" editor="basic">
+</codapi-snippet>
+
+Note a couple of things here:
+
+- `Session` provides a stateful database connection (the data is stored in the temporary folder and discarded when the connection is closed).
+- The second argument to the `query` method specifies the output format. There are many [supported formats](/formats) such as `CSV`, `SQLInsert`, `JSON` and `XML` (try changing the format in the above example and re-running the code). The default one is `CSV`.
+
+#### Reading data
+
+As with output formats, chDB supports any input format supported by ClickHouse.
+
+For example, we can read a dataset from CSV:
+
+```python
+query_sql = "select * from 'employees.csv'"
+res = chdb.query(query_sql, "PrettyCompactNoEscapes")
+print(
+    f"{res.rows_read()} rows | "
+    f"{res.bytes_read()} bytes | "
+    f"{res.elapsed()} seconds"
+)
+```
+
+<codapi-snippet sandbox="chdb-python" editor="basic" template="#main.py" files="data/employees.csv">
+</codapi-snippet>
+
+Or work with an external dataset as if it were a database table:
+
+```python
+query_sql = """
+select distinct city
+from 'employees.csv'
+"""
+
+res = chdb.query(query_sql, "CSV")
+print(res, end="")
+```
+
+<codapi-snippet sandbox="chdb-python" editor="basic" template="#main.py" files="data/employees.csv">
+</codapi-snippet>
+
+We can even query Pandas dataframes as if they were tables:
 
 ```python
 import chdb.dataframe as cdf
 import pandas as pd
-# Join 2 DataFrames
-df1 = pd.DataFrame({'a': [1, 2, 3], 'b': ["one", "two", "three"]})
-df2 = pd.DataFrame({'c': [1, 2, 3], 'd': ["①", "②", "③"]})
-ret_tbl = cdf.query(sql="select * from __tbl1__ t1 join __tbl2__ t2 on t1.a = t2.c",
-                  tbl1=df1, tbl2=df2)
-print(ret_tbl)
-print()
 
-# Query on the DataFrame Table
-print(ret_tbl.query('select b, sum(a) from __table__ group by b'))
+employees = pd.read_csv("employees.csv")
+departments = pd.read_csv("departments.csv")
+
+query_sql = """
+select
+  emp_id, first_name,
+  dep.name as dep_name,
+  salary
+from __emp__ as emp
+    join __dep__ as dep using(dep_id)
+order by salary desc;
+"""
+
+res = cdf.query(sql=query_sql, emp=employees, dep=departments)
+print(res, end="")
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic">
+<codapi-snippet sandbox="chdb-python" editor="basic" files="data/employees.csv data/departments.csv">
 </codapi-snippet>
 
-##### **🗂️ Stateful Sessions**
+#### Writing data
 
-Use chdb stateful sessions to persist data between queries in temporary or dedicated folders
+The easiest way to export data is to use the output format (the second parameter in the `query` method), and then write the data to disk:
 
 ```python
-from chdb import session as chs
+from pathlib import Path
 
-## Create DB, Table, View in temp session, auto cleanup when session is deleted.
-sess = chs.Session()
-sess.query("CREATE DATABASE IF NOT EXISTS db_xxx ENGINE = Atomic")
-sess.query("CREATE TABLE IF NOT EXISTS db_xxx.log_table_xxx (x String, y Int) ENGINE = Log;")
-sess.query("INSERT INTO db_xxx.log_table_xxx VALUES ('a', 1), ('b', 3), ('c', 2), ('d', 5);")
-sess.query("CREATE VIEW db_xxx.view_xxx AS SELECT * FROM db_xxx.log_table_xxx LIMIT 4;")
+query_sql = "select * from 'employees.csv'"
+res = chdb.query(query_sql, "Parquet")
 
-print("Select from view:\n")
-print(sess.query("SELECT * FROM db_xxx.view_xxx", "PrettyCompactNoEscapes"))
+# export to Parquet
+path = Path("/tmp/employees.parquet")
+path.write_bytes(res.bytes())
+
+# import from Parquet
+query_sql = "select * from '/tmp/employees.parquet' limit 5"
+res = chdb.query(query_sql, "PrettyCompactNoEscapes")
+print(res, end="")
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic">
+<codapi-snippet sandbox="chdb-python" editor="basic" template="#main.py" files="data/employees.csv">
 </codapi-snippet>
 
-Use a dedicated folder to reattach the same storage and tables to each session
-```
-sess = chs.Session('/tmp/mysession')
-```
-
-##### **🗂️ Python DB-API 2.0**
-
-Use chdb in your scripts through the Python DB-API 2.0
+We can also easily convert the chDB result object into a PyArrow table:
 
 ```python
-import chdb.dbapi as dbapi
-print("chdb driver version: {0}".format(dbapi.get_client_info()))
+query_sql = "select * from 'employees.csv'"
+res = chdb.query(query_sql, "Arrow")
 
-conn1 = dbapi.connect()
-cur1 = conn1.cursor()
-cur1.execute('select version()')
-print("description: ", cur1.description)
-print("data: ", cur1.fetchone())
-cur1.close()
-conn1.close()
+table = chdb.to_arrowTable(res)
+print(table.schema)
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic">
+<codapi-snippet sandbox="chdb-python" editor="basic" template="#main.py" files="data/employees.csv">
 </codapi-snippet>
 
-##### **🗂️ UDF**
+Or Pandas dataframe:
 
-Easily implement and execute user defined functions in your chdb scripts and queries
+```python
+query_sql = "select * from 'employees.csv'"
+res = chdb.query(query_sql, "Arrow")
+
+frame = chdb.to_df(res)
+frame.info()
+```
+
+<codapi-snippet sandbox="chdb-python" editor="basic" template="#main.py" files="data/employees.csv">
+</codapi-snippet>
+
+To persist a chDB session to a specific folder on disk, use the `path` constructor parameter. This way you can restore the session later:
+
+```python
+from chdb.session import Session
+
+# create a persistent session
+db = Session(path="/tmp/employees")
+
+# create a database and a table
+db.query("create database db")
+db.query("""
+create table db.employees (
+  emp_id UInt32 primary key,
+  first_name String, last_name String,
+  birth_dt Date, hire_dt Date,
+  dep_id String, city String,
+  salary UInt32,
+) engine MergeTree;
+""")
+
+# load data into the table
+db.query("""
+insert into db.employees
+select * from 'employees.csv'
+""")
+
+# ...
+# restore the session later
+db = Session(path="/tmp/employees")
+
+# query the data
+res = db.query("select count(*) from db.employees")
+print(res, end="")
+```
+
+<codapi-snippet sandbox="chdb-python" editor="basic" files="data/employees.csv">
+</codapi-snippet>
+
+#### User-defined functions
+
+We can define a function in Python and use it in chDB SQL queries.
+
+Here is a `split_part` function that splits a string on the given separator and returns the resulting field with the given index (counting from one):
 
 ```python
 from chdb.udf import chdb_udf
-from chdb import query
 
-@chdb_udf(return_type="Int32")
-def sum_udf(lhs, rhs):
-    return int(lhs) + int(rhs)
+@chdb_udf()
+def split_part(s, sep, idx):
+    idx = int(idx)-1
+    return s.split(sep)[idx]
 
-print(query("select sum_udf(12,22)"))
+
+second = chdb.query("select split_part('a;b;c', ';', 2)")
+print(second, end="")
 ```
 
-<codapi-snippet sandbox="chdb-python" editor="basic">
+<codapi-snippet sandbox="chdb-python" editor="basic" template="#main.py">
 </codapi-snippet>
 
-##### Decorator for chDB Python UDF(User Defined Function)
+And here is a `sumn` function that calculates a sum from 1 to N:
+
+```python
+from chdb.udf import chdb_udf
+
+@chdb_udf(return_type="Int32")
+def sumn(n):
+    n = int(n)
+    return n*(n+1)//2
+
+
+sum20 = chdb.query("select sumn(20)")
+print(sum20, end="")
+```
+
+<codapi-snippet sandbox="chdb-python" editor="basic" template="#main.py">
+</codapi-snippet>
+
+chDB Python UDF requirements:
 
 1. The function should be stateless. So, only UDFs are supported, not UDAFs(User Defined Aggregation Function).
 2. Default return type is String. If you want to change the return type, you can pass in the return type as an argument.
@@ -161,26 +296,29 @@ print(query("select sum_udf(12,22)"))
     ```
 6. Python interpertor used is the same as the one used to run the script. Get from `sys.executable`
 
-##### **🗂️ Query Format**
+#### Python Database API
 
-You can execute SQL against any supported type and return any available [format](https://clickhouse.com/docs/en/interfaces/formats) _(Parquet, CSV, JSON, Arrow, ORC and 60+)_
+The chDB Python package adheres to the Python DB API ([PEP 249](https://peps.python.org/pep-0249/)), so you can use it just like you'd use stdlib's `sqlite3` module:
 
 ```python
-import chdb
-res = chdb.query('select chdb(), version()', 'PrettyCompactNoEscapes');
-print(res)
+from contextlib import closing
+from chdb import dbapi
+
+print(f"chdb version: {dbapi.get_client_info()}")
+
+with closing(dbapi.connect()) as conn:
+    with closing(conn.cursor()) as cur:
+        cur.execute("select version()")
+        print("description:", cur.description)
+        print("data:", cur.fetchone())
 ```
 
 <codapi-snippet sandbox="chdb-python" editor="basic">
 </codapi-snippet>
 
-<!-- tabs:end -->
-
-For more examples, see [https://github.com/chdb-io/chdb/tree/main/examples](examples) and [tests]([tests](https://github.com/chdb-io/chdb/tree/main/tests)).
+For more examples, see [examples](https://github.com/chdb-io/chdb/tree/main/examples) and [tests](https://github.com/chdb-io/chdb/tree/main/tests).
 
 <br>
-
-
 
 ### **NodeJS**
 
