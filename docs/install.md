@@ -319,9 +319,10 @@ chDB Python UDF requirements:
 
 
 <!-- tabs:end -->
+
 <!-- tabs:start -->
 
-#### **Python Database API**  
+#### **Python DB API**  
 
 The chDB Python package adheres to the Python DB API ([PEP 249](https://peps.python.org/pep-0249/)), so you can use it just like you'd use stdlib's `sqlite3` module:
 
