@@ -251,6 +251,31 @@ print(res, end="")
 <!-- tabs:end -->
 <!-- tabs:start -->
 
+#### **Python DB API**  
+
+The chDB Python package adheres to the Python DB API ([PEP 249](https://peps.python.org/pep-0249/)), so you can use it just like you'd use stdlib's `sqlite3` module:
+
+```python
+from contextlib import closing
+from chdb import dbapi
+
+print(f"chdb version: {dbapi.get_client_info()}")
+
+with closing(dbapi.connect()) as conn:
+    with closing(conn.cursor()) as cur:
+        cur.execute("SELECT version()")
+        print("description:", cur.description)
+        print("data:", cur.fetchone())
+```
+
+<codapi-snippet sandbox="chdb-python" editor="basic">
+</codapi-snippet>
+
+For more examples, see [examples](https://github.com/chdb-io/chdb/tree/main/examples) and [tests](https://github.com/chdb-io/chdb/tree/main/tests).
+
+<!-- tabs:end -->
+<!-- tabs:start -->
+
 #### **User-defined functions**
 
 We can define a function in Python and use it in chDB SQL queries.
@@ -320,31 +345,6 @@ chDB Python UDF requirements:
 
 <!-- tabs:end -->
 
-<!-- tabs:start -->
-
-#### **Python DB API**  
-
-The chDB Python package adheres to the Python DB API ([PEP 249](https://peps.python.org/pep-0249/)), so you can use it just like you'd use stdlib's `sqlite3` module:
-
-```python
-from contextlib import closing
-from chdb import dbapi
-
-print(f"chdb version: {dbapi.get_client_info()}")
-
-with closing(dbapi.connect()) as conn:
-    with closing(conn.cursor()) as cur:
-        cur.execute("SELECT version()")
-        print("description:", cur.description)
-        print("data:", cur.fetchone())
-```
-
-<codapi-snippet sandbox="chdb-python" editor="basic">
-</codapi-snippet>
-
-For more examples, see [examples](https://github.com/chdb-io/chdb/tree/main/examples) and [tests](https://github.com/chdb-io/chdb/tree/main/tests).
-
-<!-- tabs:end -->
 
 <br>
 
