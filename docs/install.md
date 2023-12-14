@@ -319,8 +319,7 @@ chDB Python UDF requirements:
 
 
 <!-- tabs:end -->
-
-<!--
+<!-- tabs:start -->
 
 #### **Python DB API**  
 
@@ -344,7 +343,7 @@ with closing(dbapi.connect()) as conn:
 
 For more examples, see [examples](https://github.com/chdb-io/chdb/tree/main/examples) and [tests](https://github.com/chdb-io/chdb/tree/main/tests).
 
--->
+<!-- tabs:end -->
 
 <br>
 
