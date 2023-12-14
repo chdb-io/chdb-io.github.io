@@ -345,6 +345,8 @@ For more examples, see [examples](https://github.com/chdb-io/chdb/tree/main/exam
 
 <!-- tabs:end -->
 
+<!-- tabs:end -->
+
 <br>
 
 ### **NodeJS**
