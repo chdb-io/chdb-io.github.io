@@ -16,10 +16,14 @@ pip install chdb
 
 #### Usage
 
+<!-- tabs:start -->
+
+#### ** Basics **
+
 | `python3 -m chdb [SQL] [OutputFormat]` 
 
 ```bash
-python3 -m chdb "select 1, 'abc'" Pretty
+python3 -m chdb "SELECT 1, 'abc'" Pretty
 ```
 
 Or:
@@ -27,7 +31,7 @@ Or:
 ```python
 import chdb
 
-res = chdb.query("select 1, 'abc'", "CSV")
+res = chdb.query("SELECT 1, 'abc'", "CSV")
 print(res, end="")
 ```
 
@@ -42,7 +46,11 @@ import chdb
 ##CODE##
 </script>
 
-#### SQL dialect
+<!-- tabs:end -->
+
+
+<!-- tabs:start -->
+#### ** SQL dialect **
 
 chDB is a wrapper around ClickHouse, so it supports exactly the same [SQL syntax](https://clickhouse.com/docs/en/sql-reference/syntax), including joins, CTEs, set operations, aggregations and window functions.
 
@@ -52,23 +60,23 @@ For example, let's create a sampled table of 10000 random numbers and calculate 
 from chdb.session import Session
 
 db = Session()
-db.query("create database db")
-db.query("use db")
+db.query("CREATE DATABASE db")
+db.query("USE db")
 
 db.query("""
-create table data (id UInt32, x UInt32)
-engine MergeTree order by id sample by id
-as
-select number+1 as id, randUniform(1, 100) as x
-from numbers(10000);
+CREATE TABLE data (id UInt32, x UInt32)
+ENGINE MergeTree ORDER BY id SAMPLE BY id
+AS
+SELECT number+1 AS id, randUniform(1, 100) AS x
+FROM numbers(10000);
 """)
 
 query_sql = """
-select
+SELECT
   avg(x) as "avg",
-  round(quantile(0.95)(x), 2) as p95
-from data
-sample 0.1;
+  round(quantile(0.95)(x), 2) AS p95
+FROM data
+SAMPLE 0.1;
 """
 
 res = db.query(query_sql, "PrettyCompactNoEscapes")
@@ -83,14 +91,18 @@ Note a couple of things here:
 - `Session` provides a stateful database connection (the data is stored in the temporary folder and discarded when the connection is closed).
 - The second argument to the `query` method specifies the output format. There are many [supported formats](/formats) such as `CSV`, `SQLInsert`, `JSON` and `XML` (try changing the format in the above example and re-running the code). The default one is `CSV`.
 
-#### Reading data
+<!-- tabs:end -->
+
+<!-- tabs:start -->
+
+#### **Reading data**
 
 As with output formats, chDB supports any input format supported by ClickHouse.
 
 For example, we can read a dataset from CSV:
 
 ```python
-query_sql = "select * from 'employees.csv'"
+query_sql = "SELECT * FROM 'employees.csv'"
 res = chdb.query(query_sql, "PrettyCompactNoEscapes")
 print(
     f"{res.rows_read()} rows | "
@@ -106,8 +118,8 @@ Or work with an external dataset as if it were a database table:
 
 ```python
 query_sql = """
-select distinct city
-from 'employees.csv'
+SELECT DISTINCT city
+FROM 'employees.csv'
 """
 
 res = chdb.query(query_sql, "CSV")
@@ -143,14 +155,18 @@ print(res, end="")
 <codapi-snippet sandbox="chdb-python" editor="basic" files="data/employees.csv data/departments.csv">
 </codapi-snippet>
 
-#### Writing data
+<!-- tabs:end -->
+
+<!-- tabs:start -->
+
+#### **Writing data**
 
 The easiest way to export data is to use the output format (the second parameter in the `query` method), and then write the data to disk:
 
 ```python
 from pathlib import Path
 
-query_sql = "select * from 'employees.csv'"
+query_sql = "SEELECT * FROM 'employees.csv'"
 res = chdb.query(query_sql, "Parquet")
 
 # export to Parquet
@@ -158,7 +174,7 @@ path = Path("/tmp/employees.parquet")
 path.write_bytes(res.bytes())
 
 # import from Parquet
-query_sql = "select * from '/tmp/employees.parquet' limit 5"
+query_sql = "SELECT * FROM '/tmp/employees.parquet' LIMIT 5"
 res = chdb.query(query_sql, "PrettyCompactNoEscapes")
 print(res, end="")
 ```
@@ -169,7 +185,7 @@ print(res, end="")
 We can also easily convert the chDB result object into a PyArrow table:
 
 ```python
-query_sql = "select * from 'employees.csv'"
+query_sql = "SELECT * FROM 'employees.csv'"
 res = chdb.query(query_sql, "Arrow")
 
 table = chdb.to_arrowTable(res)
@@ -182,7 +198,7 @@ print(table.schema)
 Or Pandas dataframe:
 
 ```python
-query_sql = "select * from 'employees.csv'"
+query_sql = "SELECT * FROM 'employees.csv'"
 res = chdb.query(query_sql, "Arrow")
 
 frame = chdb.to_df(res)
@@ -201,21 +217,21 @@ from chdb.session import Session
 db = Session(path="/tmp/employees")
 
 # create a database and a table
-db.query("create database db")
+db.query("CREATE DATABASE db")
 db.query("""
-create table db.employees (
+CREATE TABLE db.employees (
   emp_id UInt32 primary key,
   first_name String, last_name String,
   birth_dt Date, hire_dt Date,
   dep_id String, city String,
   salary UInt32,
-) engine MergeTree;
+) ENGINE MergeTree;
 """)
 
 # load data into the table
 db.query("""
-insert into db.employees
-select * from 'employees.csv'
+INSERT INTO db.employees
+SELECT * FROM 'employees.csv'
 """)
 
 # ...
@@ -223,14 +239,18 @@ select * from 'employees.csv'
 db = Session(path="/tmp/employees")
 
 # query the data
-res = db.query("select count(*) from db.employees")
+res = db.query("SELECT count(*) FROM db.employees")
 print(res, end="")
 ```
 
 <codapi-snippet sandbox="chdb-python" editor="basic" files="data/employees.csv">
 </codapi-snippet>
 
-#### User-defined functions
+<!-- tabs:end -->
+
+<!-- tabs:start -->
+
+#### **User-defined functions**
 
 We can define a function in Python and use it in chDB SQL queries.
 
@@ -245,7 +265,7 @@ def split_part(s, sep, idx):
     return s.split(sep)[idx]
 
 
-second = chdb.query("select split_part('a;b;c', ';', 2)")
+second = chdb.query("SELECT split_part('a;b;c', ';', 2)")
 print(second, end="")
 ```
 
@@ -263,7 +283,7 @@ def sumn(n):
     return n*(n+1)//2
 
 
-sum20 = chdb.query("select sumn(20)")
+sum20 = chdb.query("SELECT sumn(20)")
 print(sum20, end="")
 ```
 
@@ -296,7 +316,11 @@ chDB Python UDF requirements:
     ```
 6. Python interpertor used is the same as the one used to run the script. Get from `sys.executable`
 
-#### Python Database API
+<!-- tabs:end -->
+
+<!-- tabs:start -->
+
+#### **Python Database API**  
 
 The chDB Python package adheres to the Python DB API ([PEP 249](https://peps.python.org/pep-0249/)), so you can use it just like you'd use stdlib's `sqlite3` module:
 
@@ -308,13 +332,15 @@ print(f"chdb version: {dbapi.get_client_info()}")
 
 with closing(dbapi.connect()) as conn:
     with closing(conn.cursor()) as cur:
-        cur.execute("select version()")
+        cur.execute("SELECT version()")
         print("description:", cur.description)
         print("data:", cur.fetchone())
 ```
 
 <codapi-snippet sandbox="chdb-python" editor="basic">
 </codapi-snippet>
+
+<!-- tabs:end -->
 
 For more examples, see [examples](https://github.com/chdb-io/chdb/tree/main/examples) and [tests](https://github.com/chdb-io/chdb/tree/main/tests).
 
