@@ -7,7 +7,7 @@
 ### **Python**
 
 #### Requirements
-* Python 3.8+ on macOS and Linux (x86_64 and ARM64)
+* Python 3.8+ on macOS and Linux _(x86_64 and ARM64)_
 
 #### Installation
 ```bash
@@ -15,6 +15,8 @@ pip install chdb
 ```
 
 #### Usage
+
+<img src="https://codapi.org/assets/logos/codapi.svg" height=15> The interactive examples on this page are powered by [codapi](https://codapi.org)
 
 <!-- tabs:start -->
 
