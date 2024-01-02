@@ -41,10 +41,24 @@ curl -L -o libchdb.tar.gz $DOWNLOAD_URL
 # Untar the file
 tar -xzf libchdb.tar.gz
 
+# Check if console supports colors, if that define REDECHO and ENDECHO
+if [[ -t 1 ]]; then
+    RED='\033[0;31m'
+    NC='\033[0m'
+    REDECHO() { echo -e "${RED}$@${NC}"; }
+    ENDECHO() { echo -ne "${NC}"; }
+else
+    REDECHO() { echo "$@"; }
+    ENDECHO() { :; }
+fi
+
 # If current uid is 0, SUDO is not required
 SUDO=''
 if [[ $EUID -ne 0 ]]; then
     SUDO='sudo'
+    REDECHO "\nYou may be asked for your sudo password to install:"; ENDECHO
+    echo "  libchdb.so to /usr/local/lib/"
+    echo "  chdb.h to /usr/local/include/"
 fi
 
 # Install the library and header file
@@ -62,6 +76,6 @@ fi
 # Clean up
 rm -f libchdb.tar.gz libchdb.so chdb.h
 
-echo "Installation completed successfully."
-echo "If any error occurred, please report it to:"
-echo "  https://github.com/chdb-io/chdb/issues/new/choose"
+REDECHO "Installation completed successfully." ; ENDECHO
+REDECHO "If any error occurred, please report it to:" ; ENDECHO
+REDECHO "  https://github.com/chdb-io/chdb/issues/new/choose" ; ENDECHO
