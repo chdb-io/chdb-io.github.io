@@ -41,16 +41,22 @@ curl -L -o libchdb.tar.gz $DOWNLOAD_URL
 # Untar the file
 tar -xzf libchdb.tar.gz
 
+# If current uid is 0, SUDO is not required
+SUDO=''
+if [[ $EUID -ne 0 ]]; then
+    SUDO='sudo'
+fi
+
 # Install the library and header file
-sudo /bin/cp libchdb.so /usr/local/lib/
-sudo /bin/cp chdb.h /usr/local/include/
+${SUDO} /bin/cp libchdb.so /usr/local/lib/
+${SUDO} /bin/cp chdb.h /usr/local/include/
 
 # Set execute permission for libchdb.so
-sudo chmod +x /usr/local/lib/libchdb.so
+${SUDO} chmod +x /usr/local/lib/libchdb.so
 
 # Update library cache (Linux specific)
 if [[ "$(uname -s)" == "Linux" ]]; then
-    sudo ldconfig
+    ${SUDO} ldconfig
 fi
 
 # Clean up
