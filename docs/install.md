@@ -352,39 +352,18 @@ For more examples, see [examples](https://github.com/chdb-io/chdb/tree/main/exam
 #### Requirements
 
 <!-- tabs:start -->
-📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
-##### **Manual**
-<!-- tabs:start -->
-#### **AMD64**
+📦 Install [libchdb](https://github.com/chdb-io/chdb) on your amd64/arm64 system before proceeding
+##### One-liner
 ```bash
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
-unzip libchdb.zip
-mv libchdb.so /usr/lib/libchdb.so
+curl -s https://lib.chdb.io | sudo bash
 ```
-#### **ARM64**
-```bash
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
-unzip libchdb_arm64.zip
-mv libchdb.so /usr/lib/libchdb.so
-```
-<!-- tabs:end -->
-##### **DEB**
-```bash
-wget -q -O - https://github.com/metrico/metrico.github.io/raw/main/libchdb_installer.sh | sudo bash
-sudo apt install libchdb
-```
-##### **RPM**
-```bash
-wget -q -O - https://github.com/metrico/metrico.github.io/raw/main/libchdb_installer.sh | sudo bash
-sudo yum install -y libchdb
-```
+
 <!-- tabs:end -->
 
 
 #### Installation
-```bash
-npm install chdb-node
-```
+
+See: [chdb-node](https://github.com/chdb-io/chdb-node)
 
 #### Usage
 
@@ -395,46 +374,29 @@ npm install chdb-node
 You can leverage the power of chdb in your NodeJS applications by importing and using the `chdb-node` module
 
 ```javascript
-const chdb = require("chdb-node");
+const { query, Session } = require(".");
 
-// Query (ephemeral)
-const db = new chdb.db("CSV") // format
-var result = db.query("SELECT version()");
-console.log(result) // 23.6.1.1
+var ret;
 
-// Query Session (persistent)
-const dbdisk = new chdb.db("CSV", "/tmp/mysession") // format, storage path
-dbdisk.session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'");
-var result = dbdisk.session("SELECT hello()", "TabSeparated"); // optional format override
-console.log(result) // chDB
-```
+// Test standalone query
+ret = query("SELECT version(), 'Hello chDB', chdb()", "CSV");
+console.log("Standalone Query Result:", ret);
 
-#####  **🗂️ Stateless Query**
-Run stateless chdb queries using the `Execute` function with parameters _(query, format)_
-```javascript
-const chdb = require("chdb-node").chdb;
-var result = chdb.Execute("SELECT version()", "CSV");
-console.log(result) // 23.6.1.1
-```
+// Test session query
+// Create a new session instance
+const session = new Session("./chdb-node-tmp");
+ret = session.query("SELECT 123", "CSV")
+console.log("Session Query Result:", ret);
+ret = session.query("CREATE DATABASE IF NOT EXISTS testdb;" +
+    "CREATE TABLE IF NOT EXISTS testdb.testtable (id UInt32) ENGINE = MergeTree() ORDER BY id;");
 
-##### **🗂️ Stateful Sessions**
-Run stateful chdb sessions using the `Session` function with parameters _(query, *format, *path)_
-```javascript
-const chdb = require("chdb-node").chdb;
-chdb.Session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'")
-var result =  = chdb.Session("SELECT hello();")
-console.log(result) // chDB
-```
+session.query("USE testdb; INSERT INTO testtable VALUES (1), (2), (3);")
 
-> ⚠️ Sessions persist table data to disk. You can specify `path` to implement auto-cleanup strategies
-> 
-```javascript
-const temperment = require("temperment");
-const tmp = temperment.directory();
-chdb.Session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'", "CSV", tmp)
-var result =  = chdb.Session("SELECT hello();")
-console.log(result) // chDB
-tmp.cleanup.sync();
+ret = session.query("SELECT * FROM testtable;")
+console.log("Session Query Result:", ret);
+
+// Clean up the session
+session.cleanup();
 ```
 <!-- tabs:end -->
 
@@ -443,91 +405,29 @@ tmp.cleanup.sync();
 #### Requirements
 
 <!-- tabs:start -->
-📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
-##### **Manual**
-<!-- tabs:start -->
-#### **AMD64**
+📦 Install [libchdb](https://github.com/chdb-io/chdb/releases/latest) on your amd64/arm64 system before proceeding
+##### One-liner
 ```bash
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
-unzip libchdb.zip
-mv libchdb.so /usr/lib/libchdb.so
+curl -s https://lib.chdb.io | sudo bash
 ```
-#### **ARM64**
-```bash
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
-unzip libchdb_arm64.zip
-mv libchdb.so /usr/lib/libchdb.so
-```
-<!-- tabs:end -->
-##### **DEB**
-```bash
-wget -q -O - https://github.com/metrico/metrico.github.io/raw/main/libchdb_installer.sh | sudo bash
-sudo apt install libchdb
-```
-##### **RPM**
-```bash
-wget -q -O - https://github.com/metrico/metrico.github.io/raw/main/libchdb_installer.sh | sudo bash
-sudo yum install -y libchdb
-```
+
 <!-- tabs:end -->
 
 #### Installation
-```bash
-go get github.com/chdb-io/chdb-go/chdb
-```
 
-#### Usage
-```go
-package main
-
-import (
-    "fmt"
-    "github.com/chdb-io/chdb-go/chdb"
-)
-
-func main() {
-    // Stateless Query
-    result := chdb.Query("SELECT version()", "CSV")
-    fmt.Println(result)
-
-    // Stateful Query (persistent)
-    chdb.Session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'", "CSV", "/tmp")
-    hello := chdb.Session("SELECT hello()", "CSV", "/tmp")
-    fmt.Println(hello)
-}
-```
+Install and Examples, see: [chdb-go](https://github.com/chdb-io/chdb-go)
 
 ### **Rust**
 
 #### Requirements
 
 <!-- tabs:start -->
-📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
-##### **Manual**
-<!-- tabs:start -->
-#### **AMD64**
+📦 Install [libchdb](https://github.com/chdb-io/chdb/releases/latest) on your amd64/arm64 system before proceeding
+##### One-liner
 ```bash
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
-unzip libchdb.zip
-mv libchdb.so /usr/lib/libchdb.so
+curl -s https://lib.chdb.io | sudo bash
 ```
-#### **ARM64**
-```bash
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
-unzip libchdb_arm64.zip
-mv libchdb.so /usr/lib/libchdb.so
-```
-<!-- tabs:end -->
-##### **DEB**
-```bash
-wget -q -O - https://github.com/metrico/metrico.github.io/raw/main/libchdb_installer.sh | sudo bash
-sudo apt install libchdb
-```
-##### **RPM**
-```bash
-wget -q -O - https://github.com/metrico/metrico.github.io/raw/main/libchdb_installer.sh | sudo bash
-sudo yum install -y libchdb
-```
+
 <!-- tabs:end -->
 
 #### Usage
@@ -539,84 +439,44 @@ This binding is a work in progress. Follow the instructions at [chdb-rust](https
 #### Requirements
 
 <!-- tabs:start -->
-📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
-##### **Manual**
-<!-- tabs:start -->
-#### **AMD64**
+📦 Install [libchdb](https://github.com/chdb-io/chdb/releases/latest) on your amd64/arm64 system before proceeding
+##### One-liner
 ```bash
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
-unzip libchdb.zip
-mv libchdb.so /usr/lib/libchdb.so
+curl -s https://lib.chdb.io | sudo bash
 ```
-#### **ARM64**
-```bash
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
-unzip libchdb_arm64.zip
-mv libchdb.so /usr/lib/libchdb.so
-```
-<!-- tabs:end -->
-##### **DEB**
-```bash
-wget -q -O - https://github.com/metrico/metrico.github.io/raw/main/libchdb_installer.sh | sudo bash
-sudo apt install libchdb
-```
-##### **RPM**
-```bash
-wget -q -O - https://github.com/metrico/metrico.github.io/raw/main/libchdb_installer.sh | sudo bash
-sudo yum install -y libchdb
-```
+
 <!-- tabs:end -->
 
 #### Installation
-```bash
-bun install chdb-bun
-```
+
+Install and Examples, see: [chdb-bun](https://github.com/chdb-io/chdb-bun)
 
 #### Usage
 
 <!-- tabs:start -->
 
-##### **🗂️ Query Constructor**
-```js
-import { db } from 'chdb-bun';
+#### Query(query, *format) (ephemeral)
+```javascript
+import { query } from 'chdb-bun';
 
 // Query (ephemeral)
-const conn = new db('CSV')
-console.log(conn.query("SELECT version()")); // 23.10.1.1
+var result = query("SELECT version()", "CSV");
+console.log(result); // 23.10.1.1
+```
+
+#### Session.Query(query, *format)
+```javascript
+import { Session } from 'chdb-bun';
+const sess = new Session('./chdb-bun-tmp');
 
 // Query Session (persistent)
-conn.session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'");
-console.log(conn.session("SELECT hello()", "CSV")); // chDB
-```
+sess.query("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'Hello chDB'", "CSV");
+var result = sess.query("SELECT hello()", "CSV");
+console.log(result);
 
-##### **🗂️ Query _(query, *format)_ **
-```javascript
-import { db } from 'chdb-bun';
-const conn = new db('CSV')
+// Before cleanup, you can find the database files in `./chdb-bun-tmp`
 
-// Query (ephemeral)
-var result = conn.query("SELECT version()", "CSV");
-console.log(result) // 23.10.1.1
-```
-
-##### **🗂️ Session _(query, *format, *path)_**
-```javascript
-import { db } from 'chdb-bun';
-const conn = new db('CSV', '/tmp')
-
-// Query Session (persistent)
-conn.session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'");
-console.logconn.session("SELECT hello()", "CSV"));
-```
-
-> ⚠️ Sessions persist table data to disk. You can specify `path` to implement auto-cleanup strategies:
-```javascript
-const temperment = require("temperment");
-const tmp = temperment.directory();
-conn.session("CREATE FUNCTION IF NOT EXISTS hello AS () -> 'chDB'", "CSV", tmp)
-var result =  = chdb.Session("SELECT hello();")
-console.log(result) // chDB
-tmp.cleanup.sync();
+sess.cleanup(); // cleanup session, this will delete the database
 ```
 
 <!-- tabs:end -->
@@ -627,37 +487,17 @@ tmp.cleanup.sync();
 #### Requirements
 
 <!-- tabs:start -->
-📦 Install [libchdb](https://github.com/metrico/libchdb) on your amd64/arm64 system before proceeding
-##### **Manual**
-<!-- tabs:start -->
-#### **AMD64**
+📦 Install [libchdb](https://github.com/chdb-io/chdb/releases/latest) on your amd64/arm64 system before proceeding
+##### One-liner
 ```bash
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb.zip
-unzip libchdb.zip
-mv libchdb.so /usr/lib/libchdb.so
+curl -s https://lib.chdb.io | sudo bash
 ```
-#### **ARM64**
-```bash
-wget https://github.com/metrico/libchdb/releases/latest/download/libchdb_arm64.zip
-unzip libchdb_arm64.zip
-mv libchdb.so /usr/lib/libchdb.so
-```
-<!-- tabs:end -->
-##### **DEB**
-```bash
-wget -q -O - https://github.com/metrico/metrico.github.io/raw/main/libchdb_installer.sh | sudo bash
-sudo apt install libchdb
-```
-##### **RPM**
-```bash
-wget -q -O - https://github.com/metrico/metrico.github.io/raw/main/libchdb_installer.sh | sudo bash
-sudo yum install -y libchdb
-```
+
 <!-- tabs:end -->
 
 #### Usage
 
-Follow the instructions for [libchdb](https://github.com/metrico/libchdb) to get started.
+Follow the instructions for [libchdb](https://github.com/chdb-io/chdb/blob/main/bindings.md) to get started.
 
 ##### chdb.h
 ```c
@@ -683,7 +523,7 @@ void free_result(local_result * result);
 
 ### **Custom**
 #### Next Binding?
-Bootstrapping a new **chdb binding**? Follow the instructions for [libchdb](https://github.com/metrico/libchdb) to get started.
+Bootstrapping a new **chdb binding**? Follow the instructions for [libchdb](https://github.com/chdb-io/chdb) to get started.
 
 
 
