@@ -353,7 +353,7 @@ For more examples, see [examples](https://github.com/chdb-io/chdb/tree/main/exam
 
 <!-- tabs:start -->
 📦 Install [libchdb](https://github.com/chdb-io/chdb) on your amd64/arm64 system before proceeding
-##### One-liner
+
 ```bash
 curl -s https://lib.chdb.io | sudo bash
 ```
@@ -406,7 +406,7 @@ session.cleanup();
 
 <!-- tabs:start -->
 📦 Install [libchdb](https://github.com/chdb-io/chdb/releases/latest) on your amd64/arm64 system before proceeding
-##### One-liner
+
 ```bash
 curl -s https://lib.chdb.io | sudo bash
 ```
@@ -423,7 +423,7 @@ Install and Examples, see: [chdb-go](https://github.com/chdb-io/chdb-go)
 
 <!-- tabs:start -->
 📦 Install [libchdb](https://github.com/chdb-io/chdb/releases/latest) on your amd64/arm64 system before proceeding
-##### One-liner
+
 ```bash
 curl -s https://lib.chdb.io | sudo bash
 ```
@@ -440,7 +440,7 @@ This binding is a work in progress. Follow the instructions at [chdb-rust](https
 
 <!-- tabs:start -->
 📦 Install [libchdb](https://github.com/chdb-io/chdb/releases/latest) on your amd64/arm64 system before proceeding
-##### One-liner
+
 ```bash
 curl -s https://lib.chdb.io | sudo bash
 ```
@@ -488,7 +488,7 @@ sess.cleanup(); // cleanup session, this will delete the database
 
 <!-- tabs:start -->
 📦 Install [libchdb](https://github.com/chdb-io/chdb/releases/latest) on your amd64/arm64 system before proceeding
-##### One-liner
+
 ```bash
 curl -s https://lib.chdb.io | sudo bash
 ```
