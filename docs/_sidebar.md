@@ -14,7 +14,7 @@
     * [chdb-node](https://github.com/chdb-io/chdb-node)
   * Go
     * [examples](/install?id=installation-3)
-    * [chdn-go](https://github.com/chdb-io/chdb-go)
+    * [chdb-go](https://github.com/chdb-io/chdb-go)
   * Rust
     * [examples](/install?id=usage-3)
     * [chdb-rust](https://github.com/chdb-io/chdb-rust)
