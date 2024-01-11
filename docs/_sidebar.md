@@ -1,6 +1,6 @@
 <!-- docs/_sidebar.md -->
 
-* [About chdb](/)
+* [About chDB](/)
 * Documentation
   * [Installation](install.md)
   * [Data Formats](formats.md)
@@ -24,12 +24,11 @@
   * [Libchdb](https://github.com/chdb-io/chdb)
 * Integrations
   * [JupySQL](https://jupysql.ploomber.io/en/latest/integrations/chdb.html)
-  * [chdb-server](https://github.com/chdb-io/chdb-server)
   * [chdb-lambda](https://github.com/chdb-io/chdb-lambda)
   * [chdb-cli](https://github.com/chdb-io/chdb-cli)
 * External Links
   * [Discord](https://discord.gg/Njw5YXSPPc)
-  * [Birth of chdb](https://auxten.com/the-birth-of-chdb/)
-  * [ClickHouse & chdb](https://clickhouse.com/blog/welcome-chdb-to-clickhouse)
+  * [Birth of chDB](https://auxten.com/the-birth-of-chdb/)
+  * [ClickHouse & chDB](https://clickhouse.com/blog/welcome-chdb-to-clickhouse)
   * [Team & Contributors](https://github.com/chdb-io/chdb#contributors)
-  * [Sponsor chdb 💛](https://github.com/sponsors/chdb-io)
+  * [Sponsor chDB 💛](https://github.com/sponsors/chdb-io)
