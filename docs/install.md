@@ -165,7 +165,7 @@ The easiest way to export data is to use the output format (the second parameter
 ```python
 from pathlib import Path
 
-query_sql = "SEELECT * FROM 'employees.csv'"
+query_sql = "SELECT * FROM 'employees.csv'"
 res = chdb.query(query_sql, "Parquet")
 
 # export to Parquet
