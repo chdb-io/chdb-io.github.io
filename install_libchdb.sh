@@ -43,22 +43,31 @@ curl -L -o libchdb.tar.gz $DOWNLOAD_URL
 # Untar the file
 tar -xzf libchdb.tar.gz
 
-# Check if console supports colors, if that define REDECHO and ENDECHO
+# If current uid is not 0, check if sudo is available and request the user to input the password
+if [[ $EUID -ne 0 ]]; then
+    command -v sudo >/dev/null 2>&1 || { echo >&2 "This script requires sudo privileges but sudo is not installed. Aborting."; exit 1; }
+    echo "Installation requires administrative access. You will be prompted for your password."
+fi
+
+# Define color messages if terminal supports them
 if [[ -t 1 ]]; then
     RED='\033[0;31m'
-    NC='\033[0m'
+    GREEN='\033[0;32m'
+    NC='\033[0m'  # No Color
     REDECHO() { echo -e "${RED}$@${NC}"; }
+    GREENECHO() { echo -e "${GREEN}$@${NC}"; }
     ENDECHO() { echo -ne "${NC}"; }
 else
     REDECHO() { echo "$@"; }
+    GREENECHO() { echo "$@"; }
     ENDECHO() { :; }
 fi
 
-# If current uid is 0, SUDO is not required
+# Use sudo if not running as root
 SUDO=''
 if [[ $EUID -ne 0 ]]; then
     SUDO='sudo'
-    REDECHO "\nYou may be asked for your sudo password to install:"; ENDECHO
+    GREENECHO "\nYou will be asked for your sudo password to install:"
     echo "  libchdb.so to /usr/local/lib/"
     echo "  chdb.h to /usr/local/include/"
 fi
@@ -78,6 +87,6 @@ fi
 # Clean up
 rm -f libchdb.tar.gz libchdb.so chdb.h
 
-REDECHO "Installation completed successfully." ; ENDECHO
+GREENECHO "Installation completed successfully." ; ENDECHO
 REDECHO "If any error occurred, please report it to:" ; ENDECHO
 REDECHO "  https://github.com/chdb-io/chdb/issues/new/choose" ; ENDECHO

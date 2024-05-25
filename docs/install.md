@@ -355,7 +355,7 @@ For more examples, see [examples](https://github.com/chdb-io/chdb/tree/main/exam
 📦 Install [libchdb](https://github.com/chdb-io/chdb) on your amd64/arm64 system before proceeding
 
 ```bash
-curl -sL https://lib.chdb.io | sudo bash
+curl -sL https://lib.chdb.io | bash
 ```
 
 <!-- tabs:end -->
@@ -408,7 +408,7 @@ session.cleanup();
 📦 Install [libchdb](https://github.com/chdb-io/chdb/releases/latest) on your amd64/arm64 system before proceeding
 
 ```bash
-curl -sL https://lib.chdb.io | sudo bash
+curl -sL https://lib.chdb.io | bash
 ```
 
 <!-- tabs:end -->
@@ -431,7 +431,7 @@ Install and Examples, see: [chdb-go](https://github.com/chdb-io/chdb-go)
 📦 Install [libchdb](https://github.com/chdb-io/chdb/releases/latest) on your amd64/arm64 system before proceeding
 
 ```bash
-curl -sL https://lib.chdb.io | sudo bash
+curl -sL https://lib.chdb.io | bash
 ```
 
 <!-- tabs:end -->
@@ -448,7 +448,7 @@ This binding is a work in progress. Follow the instructions at [chdb-rust](https
 📦 Install [libchdb](https://github.com/chdb-io/chdb/releases/latest) on your amd64/arm64 system before proceeding
 
 ```bash
-curl -sL https://lib.chdb.io | sudo bash
+curl -sL https://lib.chdb.io | bash
 ```
 
 <!-- tabs:end -->
@@ -496,7 +496,7 @@ sess.cleanup(); // cleanup session, this will delete the database
 📦 Install [libchdb](https://github.com/chdb-io/chdb/releases/latest) on your amd64/arm64 system before proceeding
 
 ```bash
-curl -sL https://lib.chdb.io | sudo bash
+curl -sL https://lib.chdb.io | bash
 ```
 
 <!-- tabs:end -->
