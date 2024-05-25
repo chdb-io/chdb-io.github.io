@@ -68,8 +68,8 @@ SUDO=''
 if [[ $EUID -ne 0 ]]; then
     SUDO='sudo'
     GREENECHO "\nYou will be asked for your sudo password to install:"
-    echo "  libchdb.so to /usr/local/lib/"
-    echo "  chdb.h to /usr/local/include/"
+    echo "    libchdb.so to /usr/local/lib/"
+    echo "    chdb.h to /usr/local/include/"
 fi
 
 # Install the library and header file
@@ -89,4 +89,4 @@ rm -f libchdb.tar.gz libchdb.so chdb.h
 
 GREENECHO "Installation completed successfully." ; ENDECHO
 REDECHO "If any error occurred, please report it to:" ; ENDECHO
-REDECHO "  https://github.com/chdb-io/chdb/issues/new/choose" ; ENDECHO
+REDECHO "    https://github.com/chdb-io/chdb/issues/new/choose" ; ENDECHO
