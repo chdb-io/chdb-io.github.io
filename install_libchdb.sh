@@ -8,6 +8,10 @@ command -v tar >/dev/null 2>&1 || { echo >&2 "tar is required but it's not insta
 
 # Get the newest release version
 LATEST_RELEASE=$(curl --silent "https://api.github.com/repos/chdb-io/chdb/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+if [[ $? -ne 0 ]]; then
+    echo "Error fetching the latest release version, trying the fallback URL."
+    LATEST_RELEASE="latest"  # Using 'latest' as the fallback release version
+fi
 
 # Select the correct package based on OS and architecture
 case "$(uname -s)" in
@@ -32,16 +36,26 @@ case "$(uname -s)" in
 esac
 
 DOWNLOAD_URL="https://github.com/chdb-io/chdb/releases/download/$LATEST_RELEASE/$PLATFORM"
+FALLBACK_URL="https://github.com/chdb-io/chdb/releases/latest/download/$PLATFORM"
 
 echo "Downloading $PLATFORM from $DOWNLOAD_URL"
 
 # Download the file
-curl -L -o libchdb.tar.gz $DOWNLOAD_URL
+if ! curl -L -o libchdb.tar.gz $DOWNLOAD_URL; then
+    echo "Failed to download the package, attempting to download from fallback URL."
+    if ! curl -L -o libchdb.tar.gz $FALLBACK_URL; then
+        echo "Failed to download the package from both primary and fallback URLs. Aborting."
+        exit 1
+    fi
+fi
 
 # Optional: Verify download integrity here, if checksums are provided
 
 # Untar the file
-tar -xzf libchdb.tar.gz
+if ! tar -xzf libchdb.tar.gz; then
+    echo "Failed to extract the package. Aborting."
+    exit 1
+fi
 
 # If current uid is not 0, check if sudo is available and request the user to input the password
 if [[ $EUID -ne 0 ]]; then
