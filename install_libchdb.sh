@@ -23,11 +23,7 @@ download_and_extract() {
         if tar -xzf "$file"; then
             echo "Extraction successful."
             return 0
-        else
-            echo "Failed to extract the file."
         fi
-    else
-        echo "Failed to download the file."
     fi
     return 1
 }
@@ -115,5 +111,5 @@ fi
 rm -f libchdb.tar.gz libchdb.so chdb.h
 
 GREENECHO "Installation completed successfully." ; ENDECHO
-REDECHO "If any error occurred, please report it to:" ; ENDECHO
-REDECHO "    https://github.com/chdb-io/chdb/issues/new/choose" ; ENDECHO
+GREENECHO "If any error occurred, please report it to:" ; ENDECHO
+GREENECHO "    https://github.com/chdb-io/chdb/issues/new/choose" ; ENDECHO
