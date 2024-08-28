@@ -95,6 +95,9 @@ if [[ $EUID -ne 0 ]]; then
     echo "    chdb.h to /usr/local/include/"
 fi
 
+# Make sure the library and header directory exists
+${SUDO} mkdir -p /usr/local/lib /usr/local/include || true
+
 # Install the library and header file
 ${SUDO} /bin/cp libchdb.so /usr/local/lib/
 ${SUDO} /bin/cp chdb.h /usr/local/include/
