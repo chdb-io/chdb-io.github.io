@@ -29,7 +29,7 @@ download_and_extract() {
 }
 
 # Get the newest release version
-LATEST_RELEASE=$(curl --silent "https://api.github.com/repos/chdb-io/chdb/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+LATEST_RELEASE=$(curl --silent "https://api.github.com/repos/chdb-io/chdb-core/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 
 # Select the correct package based on OS and architecture
 case "$(uname -s)" in
@@ -54,8 +54,8 @@ case "$(uname -s)" in
 esac
 
 # Main download URL
-DOWNLOAD_URL="https://github.com/chdb-io/chdb/releases/download/$LATEST_RELEASE/$PLATFORM"
-FALLBACK_URL="https://github.com/chdb-io/chdb/releases/latest/download/$PLATFORM"
+DOWNLOAD_URL="https://github.com/chdb-io/chdb-core/releases/download/$LATEST_RELEASE/$PLATFORM"
+FALLBACK_URL="https://github.com/chdb-io/chdb-core/releases/latest/download/$PLATFORM"
 
 # Try the main download URL first
 if ! download_and_extract "$DOWNLOAD_URL"; then
