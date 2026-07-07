@@ -29,7 +29,7 @@ download_and_extract() {
 }
 
 # Get the newest release version
-LATEST_RELEASE=$(curl --silent "https://api.github.com/repos/chdb-io/chdb-core/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+INSTALL_VERSION="${INSTALL_VERSION:-$(curl --silent "https://api.github.com/repos/chdb-io/chdb-core/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')}"
 
 # Select the correct package based on OS and architecture
 case "$(uname -s)" in
@@ -54,7 +54,7 @@ case "$(uname -s)" in
 esac
 
 # Main download URL
-DOWNLOAD_URL="https://github.com/chdb-io/chdb-core/releases/download/$LATEST_RELEASE/$PLATFORM"
+DOWNLOAD_URL="https://github.com/chdb-io/chdb-core/releases/download/$INSTALL_VERSION/$PLATFORM"
 FALLBACK_URL="https://github.com/chdb-io/chdb-core/releases/latest/download/$PLATFORM"
 
 # Try the main download URL first
@@ -77,8 +77,8 @@ if [[ -t 1 ]]; then
     RED='\033[0;31m'
     GREEN='\033[0;32m'
     NC='\033[0m'  # No Color
-    REDECHO() { echo -e "${RED}$@${NC}"; }
-    GREENECHO() { echo -e "${GREEN}$@${NC}"; }
+    REDECHO() { echo -e "${RED}$*${NC}"; }
+    GREENECHO() { echo -e "${GREEN}$*${NC}"; }
     ENDECHO() { echo -ne "${NC}"; }
 else
     REDECHO() { echo "$@"; }
