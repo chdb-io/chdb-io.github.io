@@ -92,7 +92,7 @@ if [[ $EUID -ne 0 ]]; then
     SUDO='sudo'
     GREENECHO "\nYou will be asked for your sudo password to install:"
     echo "    libchdb.so to /usr/local/lib/"
-    echo "    chdb.h to /usr/local/include/"
+    echo "    chdb.h* to /usr/local/include/"
 fi
 
 # Make sure the library and header directory exists
@@ -100,7 +100,7 @@ ${SUDO} mkdir -p /usr/local/lib /usr/local/include || true
 
 # Install the library and header file
 ${SUDO} /bin/cp libchdb.so /usr/local/lib/
-${SUDO} /bin/cp chdb.h /usr/local/include/
+${SUDO} /bin/cp chdb.h* /usr/local/include/
 
 # Set execute permission for libchdb.so
 ${SUDO} chmod +x /usr/local/lib/libchdb.so
@@ -111,7 +111,7 @@ if [[ "$(uname -s)" == "Linux" ]]; then
 fi
 
 # Clean up
-rm -f libchdb.tar.gz libchdb.so chdb.h
+rm -f libchdb.tar.gz libchdb.so chdb.h*
 
 GREENECHO "Installation completed successfully." ; ENDECHO
 GREENECHO "If any error occurred, please report it to:" ; ENDECHO
