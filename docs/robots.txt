@@ -1,0 +1,13 @@
+# Removing docs/CNAME makes chdb-io.github.io serve again instead of
+# redirecting to a domain that no longer answers. What it serves is an older
+# copy of documentation whose canonical home is now clickhouse.com/docs/chdb,
+# and the pages here still carry `robots: index, follow`, so leaving them
+# crawlable would put a stale second copy in search results against the real
+# one.
+#
+# The host is shared by this organisation's project pages, and the reason the
+# host had to be freed is one of them: chdb-core publishes a PEP 503 index of
+# its release wheels at /chdb-core/simple/. A package index is for resolvers,
+# not for search engines, so it has nothing to lose here either.
+User-agent: *
+Disallow: /
