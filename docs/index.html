@@ -9,7 +9,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <meta name="keywords"
     content="clickhouse,clickhouse-server,serverless,olap,database,slq,duckdb,chdb,python,nodejs,rust,go,binding,library,embedded database, in-process sql, embedded database">
-  <meta name="robots" content="index, follow">
+  <!-- noindex, not a crawl block: the canonical documentation is at
+       clickhouse.com/docs/chdb, and a robots.txt Disallow would stop crawlers
+       fetching these pages at all, so they could never read this line and the
+       URLs could sit in results anyway. follow stays on so the links out are
+       still discovered. -->
+  <meta name="robots" content="noindex, follow">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
